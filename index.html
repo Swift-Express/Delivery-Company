@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+<title>Swift Express Delivery Company — Global Courier & Logistics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ─── GLOBE ANIMATION KEYFRAMES ─── */
+@keyframes globe-rotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+@keyframes orbit-rotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+@keyframes orbit-rotate2{from{transform:rotate(70deg);}to{transform:rotate(430deg);}}
+.globe-spin{animation:globe-rotate 6s linear infinite;transform-origin:24px 24px;}
+.orbit-spin{animation:orbit-rotate 3.5s linear infinite;transform-origin:24px 24px;}
+.orbit-spin2{animation:orbit-rotate2 5s linear infinite;transform-origin:24px 24px;}
+.sg-spin{animation:globe-rotate 6s linear infinite;transform-origin:14px 14px;}
+.sg-orbit{animation:orbit-rotate 3.5s linear infinite;transform-origin:14px 14px;}
+
+/* ─── LIGHT MODE (default) — Sky Blue / Ink Blue / White / Black ─── */
+:root,[data-theme="light"]{
+  --ink:#0A0E14;
+  --ink2:#11161F;
+  --forest:#0B2E55;
+  --forest2:#16467F;
+  --gold:#3FA9E0;
+  --gold2:#7CC9EE;
+  --ash:#F0F4F8;
+  --ash2:#E4EAF0;
+  --mist:#F8FAFC;
+  --smoke:#5C6672;
+  --white:#FFFFFF;
+  --page-bg:#FFFFFF;
+  --card-bg:#FFFFFF;
+  --border-color:#E4EAF0;
+  --text-primary:#0A0E14;
+  --text-secondary:#5C6672;
+  --text-muted:rgba(0,0,0,.45);
+  --navbar-bg:rgba(255,255,255,.97);
+  --navbar-border:#E4EAF0;
+  --section-alt:#F8FAFC;
+  --section-alt2:#F0F4F8;
+  --input-bg:#FFFFFF;
+  --input-border:#E4EAF0;
+  --ff-display:'Cormorant Garant',Georgia,serif;
+  --ff-body:'Inter',system-ui,sans-serif;
+  --ff-utility:'Space Grotesk',sans-serif;
+}
+
+/* ─── DARK MODE ─── */
+[data-theme="dark"]{
+  --ink:#E7EEF5;
+  --ink2:#CDD9E5;
+  --forest:#4FB6E8;
+  --forest2:#7CC9EE;
+  --gold:#3FA9E0;
+  --gold2:#7CC9EE;
+  --ash:#161B22;
+  --ash2:#1C2330;
+  --mist:#0E1218;
+  --smoke:#94A3B8;
+  --white:#0A0E14;
+  --page-bg:#0A0E14;
+  --card-bg:#11161F;
+  --border-color:#1F2733;
+  --text-primary:#E7EEF5;
+  --text-secondary:#94A3B8;
+  --text-muted:rgba(232,238,245,.4);
+  --navbar-bg:rgba(10,14,20,.97);
+  --navbar-border:#1C2330;
+  --section-alt:#0D1117;
+  --section-alt2:#11161F;
+  --input-bg:#161B22;
+  --input-border:#1F2733;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:15px;}
+body{
+  font-family:var(--ff-body);
+  color:var(--text-primary);
+  background:var(--page-bg);
+  -webkit-font-smoothing:antialiased;
+  transition:background .3s ease,color .3s ease;
+}
+
+/* ─── TICKER BAR ─── */
+.ticker-bar{
+  background:var(--ink2);
+  color:rgba(255,255,255,.55);
+  font-family:var(--ff-utility);
+  font-size:.72rem;
+  letter-spacing:.06em;
+  padding:.55rem 2rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  overflow:hidden;
+  transition:background .3s;
+}
+[data-theme="dark"] .ticker-bar{background:#070A0E;}
+.ticker-clock{
+  display:flex;align-items:center;gap:1.4rem;flex-shrink:0;white-space:nowrap;
+}
+.ticker-clock .time{font-size:.9rem;font-weight:600;color:var(--gold2);letter-spacing:.12em;font-variant-numeric:tabular-nums;}
+.ticker-clock .date{color:rgba(255,255,255,.65);}
+.ticker-divider{width:1px;height:14px;background:rgba(255,255,255,.18);flex-shrink:0;}
+.ticker-scroll{flex:1;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 60px,#000 calc(100% - 60px),transparent);}
+.ticker-track{display:flex;gap:4rem;white-space:nowrap;animation:ticker-move 38s linear infinite;}
+@keyframes ticker-move{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item{display:flex;align-items:center;gap:.5rem;}
+.ticker-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+.ticker-email{flex-shrink:0;color:rgba(255,255,255,.5);white-space:nowrap;}
+.ticker-email a{color:var(--gold2);text-decoration:none;}
+
+/* ─── NAVBAR ─── */
+.navbar{
+  background:var(--navbar-bg);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  padding:.7rem 3rem;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:1000;
+  border-bottom:1px solid var(--navbar-border);
+  transition:box-shadow .3s,background .3s,border-color .3s;
+}
+.navbar.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.18);}
+.logo-wrap{display:flex;align-items:center;gap:.8rem;text-decoration:none;}
+.logo-svg-wrap{width:42px;height:42px;flex-shrink:0;overflow:visible;}
+.logo-text-block{display:flex;flex-direction:column;line-height:1;}
+.logo-brand{
+  font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.02em;
+  color:var(--forest);text-transform:uppercase;line-height:1.15;white-space:nowrap;
+}
+[data-theme="dark"] .logo-brand{color:#4FB6E8;}
+.logo-brand span.logo-accent{color:var(--gold);}
+.logo-brand span.logo-delivery{font-weight:700;}
+.logo-sub{
+  font-family:var(--ff-body);font-size:.58rem;font-weight:600;letter-spacing:.24em;
+  color:var(--text-secondary);text-transform:uppercase;margin-top:.28rem;
+}
+.nav-links{display:flex;align-items:center;gap:2.2rem;list-style:none;}
+.nav-links a{
+  text-decoration:none;font-family:var(--ff-utility);font-size:.78rem;font-weight:500;
+  letter-spacing:.08em;color:var(--text-secondary);text-transform:uppercase;
+  transition:color .2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:-4px;
+  width:0;height:1.5px;background:var(--gold);transition:width .25s ease;
+}
+.nav-links a:hover{color:var(--text-primary);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{
+  background:#0B2E55 !important;color:#fff !important;padding:.5rem 1.25rem;
+  border-radius:2px;letter-spacing:.1em !important;transition:background .2s !important;
+}
+[data-theme="dark"] .nav-cta{background:#16467F !important;}
+.nav-cta::after{display:none !important;}
+.nav-cta:hover{background:#0A0E14 !important;}
+
+/* ─── THEME SWITCHER ─── */
+.theme-switcher{position:relative;}
+.theme-btn{
+  display:flex;align-items:center;gap:.45rem;
+  background:var(--section-alt2);
+  border:1px solid var(--border-color);
+  padding:.45rem .8rem;cursor:pointer;
+  font-family:var(--ff-utility);font-size:.74rem;font-weight:600;letter-spacing:.04em;
+  color:var(--text-primary);border-radius:2px;
+  transition:border-color .2s,background .2s,transform .15s,color .2s;
+  white-space:nowrap;
+}
+.theme-btn:hover{border-color:var(--gold);background:var(--ash);}
+.theme-btn:active{transform:scale(.96);}
+.theme-btn-icon{font-size:1rem;line-height:1;}
+.theme-chevron{width:9px;height:9px;transition:transform .3s cubic-bezier(.4,0,.2,1);flex-shrink:0;}
+.theme-switcher.open .theme-chevron{transform:rotate(180deg);}
+.theme-dropdown{
+  position:absolute;top:calc(100% + 10px);left:0;right:auto;width:220px;
+  background:var(--card-bg);border:1px solid var(--border-color);
+  border-top:3px solid var(--gold);box-shadow:0 24px 56px rgba(0,0,0,.22);
+  padding:.5rem;display:flex;flex-direction:column;gap:.25rem;
+  opacity:0;visibility:hidden;transform:translateY(-10px) scale(.97);
+  transform-origin:top left;
+  transition:opacity .22s ease,transform .22s cubic-bezier(.34,1.56,.64,1),visibility .22s;
+  z-index:1500;
+}
+.theme-switcher.open .theme-dropdown{opacity:1;visibility:visible;transform:translateY(0) scale(1);}
+@media(min-width:900px){
+  .theme-dropdown{left:auto;right:0;transform-origin:top right;}
+  .theme-switcher.open .theme-dropdown{transform:translateY(0) scale(1);}
+}
+.theme-option{display:flex;align-items:center;gap:.7rem;padding:.7rem .8rem;border-radius:2px;cursor:pointer;transition:background .18s;}
+.theme-option:hover{background:var(--ash);}
+.theme-option.active{background:rgba(63,169,224,.1);}
+.theme-opt-icon{font-size:1.15rem;flex-shrink:0;}
+.theme-opt-name{font-family:var(--ff-utility);font-size:.8rem;font-weight:700;color:var(--text-primary);}
+.theme-opt-desc{font-size:.72rem;color:var(--text-secondary);margin-top:.1rem;}
+.theme-check{margin-left:auto;font-size:.85rem;color:var(--gold);font-weight:700;flex-shrink:0;min-width:14px;text-align:center;}
+
+/* ─── HERO ─── */
+.hero{
+  position:relative;height:440px;overflow:hidden;
+  display:flex;align-items:flex-end;padding:0 8% 3.5rem;
+  background-size:cover;background-position:center;
+  background-image:url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1600&q=85');
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(15deg,rgba(10,14,20,.88) 30%,rgba(10,14,20,.35) 75%,transparent);
+}
+[data-theme="dark"] .hero::before{
+  background:linear-gradient(15deg,rgba(4,6,9,.94) 30%,rgba(4,6,9,.45) 75%,transparent);
+}
+.slide-content{position:relative;z-index:2;max-width:600px;color:#fff;}
+.slide-eyebrow{
+  font-family:var(--ff-utility);font-size:.68rem;font-weight:600;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--gold2);margin-bottom:.9rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.slide-eyebrow::before{content:'';display:block;width:30px;height:1px;background:var(--gold);}
+.slide-content h1{font-family:var(--ff-display);font-size:2.9rem;font-weight:600;line-height:1.1;margin-bottom:1rem;letter-spacing:-.01em;}
+.slide-content p{font-size:.92rem;line-height:1.7;opacity:.8;max-width:440px;margin-bottom:1.6rem;font-weight:300;}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--gold);color:#0A0E14;padding:.7rem 1.8rem;text-decoration:none;
+  font-family:var(--ff-utility);font-size:.76rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  transition:background .2s,transform .2s;border-radius:1px;position:relative;overflow:hidden;
+}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-1px);}
+.btn-primary svg{width:14px;height:14px;transition:transform .2s;}
+.btn-primary:hover svg{transform:translateX(3px);}
+.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-120%);}
+.btn-primary:hover::after{transform:translateX(120%);transition:transform .7s ease;}
+
+/* ─── SECTION SHARED ─── */
+.section-eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--ff-utility);font-size:.66rem;font-weight:600;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;
+}
+.section-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--gold);}
+.section-title{font-family:var(--ff-display);font-size:2.1rem;font-weight:600;color:var(--text-primary);line-height:1.15;letter-spacing:-.01em;}
+.section-body{font-size:.9rem;line-height:1.75;color:var(--text-secondary);font-weight:300;}
+
+/* ─── SERVICES STRIP ─── */
+.services-strip{background:var(--section-alt);padding:4rem 8%;border-bottom:1px solid var(--border-color);}
+.services-strip .header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2.5rem;}
+.cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;}
+.service-card{
+  background:var(--card-bg);border:1px solid var(--border-color);position:relative;
+  overflow:hidden;cursor:default;
+  transition:transform .3s ease,box-shadow .3s ease,border-color .3s;
+  display:flex;flex-direction:column;
+}
+.service-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(0,0,0,.18);border-color:var(--forest);}
+.scard-visual{position:relative;height:170px;overflow:hidden;background:#060a10;flex-shrink:0;}
+.scard-visual .scard-bg{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform .7s ease,filter .4s ease;filter:saturate(.85) brightness(.75);
+}
+.service-card:hover .scard-bg{transform:scale(1.06);filter:saturate(1) brightness(.85);}
+.scard-brand-plate{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(10,14,20,.92) 60%,transparent);
+  padding:.7rem .9rem .45rem;display:flex;align-items:flex-end;justify-content:space-between;z-index:2;
+}
+.scard-brand-name{font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;line-height:1;}
+.scard-brand-name em{font-style:normal;color:var(--gold2);}
+.scard-logo-mark{width:24px;height:24px;flex-shrink:0;overflow:visible;}
+.scard-livery{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--forest) 0%,var(--gold) 55%,var(--forest) 100%);z-index:3;}
+.scard-badge{
+  position:absolute;top:.6rem;right:.6rem;
+  background:var(--gold);color:#0A0E14;
+  font-family:'Space Grotesk',sans-serif;font-size:.58rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:.28rem .6rem;z-index:3;
+}
+.scard-body{padding:1.2rem 1.2rem 1.4rem;flex:1;display:flex;flex-direction:column;border-top:2px solid var(--gold);}
+.scard-body h3{font-family:'Space Grotesk',sans-serif;font-size:.8rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--forest);margin-bottom:.5rem;}
+[data-theme="dark"] .scard-body h3{color:#7CC9EE;}
+.scard-body p{font-size:.81rem;color:var(--text-secondary);line-height:1.6;font-weight:300;flex:1;}
+.scard-link{
+  margin-top:.9rem;display:inline-flex;align-items:center;gap:.4rem;
+  font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--forest);text-decoration:none;border-bottom:1px solid rgba(11,46,85,.25);padding-bottom:.15rem;width:fit-content;
+  transition:color .2s,border-color .2s;
+}
+[data-theme="dark"] .scard-link{color:#7CC9EE;border-bottom-color:rgba(124,201,238,.25);}
+.scard-link svg{width:11px;height:11px;transition:transform .2s;}
+.scard-link:hover{color:var(--gold);border-color:var(--gold);}
+.scard-link:hover svg{transform:translateX(3px);}
+.service-card .s-icon{width:40px;height:40px;background:var(--ash);border-radius:1px;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;transition:background .25s;}
+.service-card:hover .s-icon{background:var(--forest);color:#fff;}
+.service-card .s-icon svg{width:18px;height:18px;stroke:var(--forest);transition:stroke .25s;}
+[data-theme="dark"] .service-card .s-icon svg{stroke:#7CC9EE;}
+.service-card:hover .s-icon svg{stroke:#fff;}
+.service-card h3{font-family:var(--ff-utility);font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-primary);margin-bottom:.55rem;}
+.service-card p{font-size:.82rem;color:var(--text-secondary);line-height:1.6;font-weight:300;}
+
+/* ─── ABOUT SPLIT ─── */
+.about-split{display:grid;grid-template-columns:1fr 1fr;min-height:420px;}
+.about-img-side{position:relative;overflow:hidden;}
+.about-img-side img{width:100%;height:100%;object-fit:cover;transform:scale(1.03);transition:transform 8s ease;}
+.about-img-side:hover img{transform:scale(1);}
+.about-img-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(11,46,85,.3),transparent);}
+.about-badge{position:absolute;bottom:2rem;left:2rem;background:var(--gold);color:#0A0E14;padding:1rem 1.3rem;font-family:var(--ff-display);}
+.about-badge .num{font-size:1.9rem;font-weight:700;line-height:1;}
+.about-badge .lbl{font-size:.68rem;font-weight:500;letter-spacing:.08em;margin-top:.2rem;}
+.about-text-side{
+  background:#0A0E14;padding:4rem 6%;display:flex;flex-direction:column;justify-content:center;color:#fff;
+  transition:background .3s;
+}
+[data-theme="dark"] .about-text-side{background:#05070A;}
+.about-text-side .section-eyebrow{color:var(--gold);}
+.about-text-side .section-title{color:#fff;}
+.about-text-side .section-body{color:rgba(255,255,255,.6);margin:1.2rem 0 1.8rem;}
+.about-text-side .btn-outline{
+  display:inline-flex;align-items:center;gap:.5rem;
+  border:1px solid rgba(255,255,255,.2);color:#fff;padding:.6rem 1.6rem;text-decoration:none;
+  font-family:var(--ff-utility);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  transition:border-color .2s,background .2s;width:fit-content;
+}
+.about-text-side .btn-outline:hover{border-color:var(--gold);background:rgba(63,169,224,.08);}
+
+/* ─── STATS ─── */
+.stats-band{
+  background:#0B2E55;padding:2rem 8%;display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background-color:rgba(255,255,255,.08);transition:background .3s;
+}
+[data-theme="dark"] .stats-band{background:#06182C;}
+.stats-band .stat-cell{background:#0B2E55;padding:1.5rem 1.4rem;border-right:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;gap:.3rem;}
+[data-theme="dark"] .stats-band .stat-cell{background:#06182C;}
+.stats-band .stat-cell:last-child{border-right:none;}
+.stat-num{font-family:var(--ff-display);font-size:2rem;font-weight:700;color:#fff;line-height:1;display:flex;align-items:flex-end;gap:.1rem;}
+.stat-suffix{font-size:1.15rem;color:var(--gold2);}
+.stat-lbl{font-family:var(--ff-utility);font-size:.66rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);}
+.stat-cell{transition:transform .3s ease;}
+.stat-cell:hover{transform:translateY(-4px);}
+
+/* ─── WHY CHOOSE ─── */
+.why-section{padding:4.5rem 8%;background:var(--page-bg);display:grid;grid-template-columns:1fr 1.1fr;gap:4rem;align-items:center;}
+.why-img{position:relative;}
+.why-img img{width:100%;height:400px;object-fit:cover;filter:grayscale(20%);}
+[data-theme="dark"] .why-img img{filter:grayscale(30%) brightness(.85);}
+.why-img-line{position:absolute;top:2rem;left:2rem;right:-1rem;bottom:-1rem;border:1px solid var(--gold);z-index:-1;opacity:.35;}
+.why-items{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1.8rem;}
+.why-item{display:flex;align-items:flex-start;gap:.7rem;padding:.7rem;border:1px solid transparent;transition:border-color .2s,background .2s;}
+.why-item:hover{border-color:var(--border-color);background:var(--section-alt);}
+.why-check{width:17px;height:17px;flex-shrink:0;background:var(--forest);border-radius:1px;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+[data-theme="dark"] .why-check{background:#16467F;}
+.why-check svg{width:9px;height:9px;stroke:#fff;stroke-width:2.5;}
+.why-item-text{font-size:.81rem;color:var(--text-primary);font-weight:500;line-height:1.4;}
+
+/* ─── TRACKING ─── */
+.track-section{background:#11161F;padding:4rem 8%;transition:background .3s;}
+[data-theme="dark"] .track-section{background:#05070A;}
+.track-inner{max-width:680px;margin:0 auto;text-align:center;}
+.track-inner .section-eyebrow{justify-content:center;}
+.track-inner .section-title{color:#fff;}
+.track-inner .section-body{color:rgba(255,255,255,.5);margin:1rem 0 2.2rem;}
+.track-box{display:flex;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);border-radius:2px;overflow:hidden;transition:border-color .2s;}
+.track-box:focus-within{border-color:var(--gold);}
+.track-box input{flex:1;background:transparent;border:none;outline:none;padding:1rem 1.4rem;font-family:var(--ff-utility);font-size:.86rem;color:#fff;letter-spacing:.04em;}
+.track-box input::placeholder{color:rgba(255,255,255,.3);}
+.track-box button{
+  background:var(--gold);color:#0A0E14;border:none;padding:1rem 1.8rem;
+  font-family:var(--ff-utility);font-size:.76rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  cursor:pointer;transition:background .2s;flex-shrink:0;
+}
+.track-box button:hover{background:var(--gold2);}
+.track-box button:disabled{opacity:.7;cursor:not-allowed;}
+.track-result{margin-top:1.8rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:1.6rem;display:none;text-align:left;}
+.track-result.show{display:block;}
+.track-status{font-family:var(--ff-utility);font-size:.76rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);margin-bottom:1.2rem;padding-bottom:.9rem;border-bottom:1px solid rgba(255,255,255,.08);}
+.track-steps{list-style:none;display:flex;flex-direction:column;gap:0;}
+.track-steps li{display:flex;gap:1rem;align-items:flex-start;padding:.85rem 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.81rem;color:rgba(255,255,255,.65);}
+.track-steps li:last-child{border:none;}
+.step-indicator{display:flex;flex-direction:column;align-items:center;flex-shrink:0;margin-top:2px;}
+.step-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;}
+.step-dot.done{background:var(--gold);}
+.step-dot.current{background:#4ade80;box-shadow:0 0 0 3px rgba(74,222,128,.2);}
+.step-line{width:1px;height:100%;background:rgba(255,255,255,.07);flex:1;min-height:20px;}
+.step-info strong{display:block;color:rgba(255,255,255,.85);font-size:.81rem;margin-bottom:.2rem;}
+.step-loc{font-size:.75rem;color:rgba(255,255,255,.4);}
+
+/* ─── PROVIDE ─── */
+.provide-section{padding:4rem 8%;background:var(--section-alt2);}
+.provide-header{text-align:center;margin-bottom:2.5rem;}
+.provide-header .section-eyebrow{justify-content:center;}
+.provide-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.3rem;}
+.provide-card{background:var(--card-bg);padding:1.7rem 1.4rem;border-left:2px solid var(--gold);transition:transform .2s,box-shadow .2s;}
+.provide-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.1);}
+.provide-card h3{font-family:var(--ff-utility);font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--forest);margin-bottom:.55rem;}
+[data-theme="dark"] .provide-card h3{color:#7CC9EE;}
+.provide-card p{font-size:.82rem;color:var(--text-secondary);line-height:1.6;font-weight:300;}
+
+/* ─── PROGRESS / CAPABILITIES ─── */
+.progress-section{padding:4.5rem 8%;background:var(--page-bg);display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.progress-text .section-body{margin:1rem 0 1.8rem;}
+.bars{display:flex;flex-direction:column;gap:1.4rem;}
+.bar-item label{display:flex;justify-content:space-between;font-family:var(--ff-utility);font-size:.71rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:.5rem;}
+.bar-item label .pct{color:var(--forest);font-weight:700;}
+[data-theme="dark"] .bar-item label .pct{color:#7CC9EE;}
+.bar-track{background:var(--border-color);height:3px;overflow:hidden;}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--forest),var(--gold));transition:width 1.4s cubic-bezier(.22,1,.36,1);width:0;}
+
+/* ─── TESTIMONIALS ─── */
+.testimonials{background:#0A0E14;padding:4rem 8%;transition:background .3s;}
+[data-theme="dark"] .testimonials{background:#05070A;}
+.testimonials .testi-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;}
+.testimonials .section-title{color:#fff;}
+.testimonials .section-eyebrow{color:var(--gold);}
+.testi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;}
+.testi-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:1.6rem;position:relative;overflow:hidden;transition:background .25s,border-color .25s;}
+.testi-card:hover{background:rgba(255,255,255,.07);border-color:rgba(63,169,224,.3);}
+.testi-card .t-quote{font-family:var(--ff-display);font-size:3.4rem;line-height:.8;color:var(--gold);opacity:.3;margin-bottom:.7rem;}
+.testi-card .t-body{font-family:var(--ff-display);font-size:.92rem;font-style:italic;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:1.2rem;}
+.testi-card .t-author{font-family:var(--ff-utility);font-size:.73rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;}
+.testi-card .t-role{font-size:.71rem;color:rgba(255,255,255,.35);margin-top:.2rem;}
+.stars{color:var(--gold2);font-size:.73rem;letter-spacing:.1em;margin-bottom:.7rem;}
+
+/* ─── TIMELINE ─── */
+.timeline-section{padding:4rem 8%;background:var(--section-alt);}
+.timeline-header{text-align:center;margin-bottom:3rem;}
+.timeline-header .section-eyebrow{justify-content:center;}
+.timeline{position:relative;max-width:760px;margin:0 auto;}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--border-color);transform:translateX(-50%);}
+.tl-item{display:flex;justify-content:flex-end;padding-right:calc(50% + 2.2rem);margin-bottom:2.2rem;position:relative;}
+.tl-item:nth-child(even){justify-content:flex-start;padding-right:0;padding-left:calc(50% + 2.2rem);}
+.tl-dot{position:absolute;left:50%;top:1rem;width:10px;height:10px;background:var(--gold);border-radius:50%;transform:translateX(-50%);border:2px solid var(--page-bg);box-shadow:0 0 0 3px var(--gold);}
+.tl-card{background:var(--card-bg);border:1px solid var(--border-color);padding:1.25rem 1.4rem;max-width:280px;border-top:2px solid var(--gold);}
+.tl-year{font-family:var(--ff-utility);font-size:.68rem;font-weight:700;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:.45rem;}
+.tl-card h3{font-family:var(--ff-display);font-size:1.02rem;font-weight:600;color:var(--text-primary);margin-bottom:.45rem;}
+.tl-card p{font-size:.81rem;color:var(--text-secondary);line-height:1.6;font-weight:300;}
+
+/* ─── AVAIL BAND ─── */
+.avail-band{background:#0B2E55;padding:3.2rem 8%;display:flex;align-items:center;justify-content:space-between;gap:2rem;transition:background .3s;}
+[data-theme="dark"] .avail-band{background:#06182C;}
+.avail-band .av-text .section-title{color:#fff;font-size:1.7rem;}
+.avail-band .av-text .section-body{color:rgba(255,255,255,.6);margin-top:.5rem;}
+.btn-gold{display:inline-flex;align-items:center;gap:.6rem;background:var(--gold);color:#0A0E14;padding:.75rem 1.8rem;text-decoration:none;font-family:var(--ff-utility);font-size:.76rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;flex-shrink:0;transition:background .2s;}
+.btn-gold:hover{background:var(--gold2);}
+
+/* ─── BLOG ─── */
+.blog-section{padding:4rem 8%;background:var(--page-bg);}
+.blog-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.2rem;}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;}
+.blog-card{display:flex;flex-direction:column;border:1px solid var(--border-color);overflow:hidden;background:var(--card-bg);transition:transform .25s,box-shadow .25s,border-color .3s;}
+.blog-card:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(0,0,0,.12);}
+.blog-card img{width:100%;height:170px;object-fit:cover;filter:saturate(.9);transition:filter .3s;}
+[data-theme="dark"] .blog-card img{filter:saturate(.9) brightness(.85);}
+.blog-card:hover img{filter:saturate(1.1);}
+[data-theme="dark"] .blog-card:hover img{filter:saturate(1.1) brightness(.95);}
+.blog-body{padding:1.4rem;flex:1;display:flex;flex-direction:column;}
+.blog-tag{font-family:var(--ff-utility);font-size:.63rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--forest);margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem;}
+[data-theme="dark"] .blog-tag{color:#7CC9EE;}
+.blog-tag::before{content:'';width:16px;height:1px;background:var(--gold);}
+.blog-card h3{font-family:var(--ff-display);font-size:1rem;font-weight:600;color:var(--text-primary);line-height:1.35;margin-bottom:.55rem;flex:1;}
+.blog-card .blog-meta{font-size:.76rem;color:var(--text-secondary);font-family:var(--ff-utility);display:flex;align-items:center;gap:.5rem;margin-top:.9rem;padding-top:.7rem;border-top:1px solid var(--border-color);}
+.blog-card .blog-meta a{color:var(--gold);font-weight:600;text-decoration:none;margin-left:auto;transition:color .2s;}
+.blog-card .blog-meta a:hover{color:var(--text-primary);}
+
+/* ─── CONTACT ─── */
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;min-height:440px;}
+.contact-dark{background:#0A0E14;padding:4rem 5%;display:flex;flex-direction:column;justify-content:center;transition:background .3s;}
+[data-theme="dark"] .contact-dark{background:#05070A;}
+.contact-dark .section-title{color:#fff;}
+.contact-dark .section-eyebrow{color:var(--gold);}
+.contact-items{margin-top:2.2rem;display:flex;flex-direction:column;gap:1.6rem;}
+.contact-item{display:flex;gap:1rem;align-items:flex-start;}
+.contact-icon{width:36px;height:36px;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.contact-icon svg{width:15px;height:15px;stroke:var(--gold);}
+.c-label{font-family:var(--ff-utility);font-size:.63rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.3rem;}
+.c-value{font-size:.86rem;color:rgba(255,255,255,.75);}
+.contact-light{background:var(--section-alt);padding:4rem 5%;display:flex;flex-direction:column;justify-content:center;}
+.contact-light h2{font-family:var(--ff-display);font-size:1.6rem;font-weight:600;color:var(--text-primary);margin-bottom:1.8rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.form-field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem;}
+.form-field label{font-family:var(--ff-utility);font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--text-secondary);}
+.form-field input,.form-field textarea,.form-field select{
+  background:var(--input-bg);border:1px solid var(--input-border);
+  padding:.7rem .95rem;font-family:var(--ff-body);font-size:.86rem;
+  color:var(--text-primary);outline:none;transition:border-color .2s,background .3s,color .3s;
+  border-radius:0;-webkit-appearance:none;
+}
+.form-field input:focus,.form-field textarea:focus,.form-field select:focus{border-color:var(--forest);}
+.form-field textarea{height:95px;resize:vertical;}
+.btn-submit{background:var(--forest);color:#fff;border:none;padding:.8rem 2.2rem;font-family:var(--ff-utility);font-size:.76rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+.btn-submit:hover{background:#0A0E14;}
+[data-theme="dark"] .btn-submit:hover{background:#161B22;}
+
+/* ─── APPOINTMENT ─── */
+.appt-section{padding:4rem 8%;background:var(--section-alt);min-height:65vh;display:flex;flex-direction:column;align-items:center;}
+.appt-section h2{font-family:var(--ff-display);font-size:2.3rem;font-weight:600;color:var(--text-primary);text-align:center;margin-bottom:.5rem;}
+.appt-section .sub{text-align:center;color:var(--text-secondary);font-size:.9rem;margin-bottom:2.5rem;}
+.appt-form-card{width:100%;max-width:600px;background:var(--card-bg);border:1px solid var(--border-color);padding:2.2rem;border-top:3px solid var(--gold);}
+
+/* ─── SERVICES PAGE ─── */
+.services-full{padding:4rem 8%;background:var(--page-bg);}
+.services-full .page-banner{background:#0A0E14;padding:3.2rem 8%;margin:-4rem -8% 3.2rem;border-bottom:3px solid var(--gold);transition:background .3s;}
+[data-theme="dark"] .services-full .page-banner{background:#05070A;}
+.services-full .page-banner h1{font-family:var(--ff-display);font-size:2.4rem;font-weight:600;color:#fff;}
+.services-full .page-banner p{color:rgba(255,255,255,.5);margin-top:.5rem;}
+
+/* ─── ABOUT PAGE ─── */
+.about-page{padding:4rem 8%;background:var(--page-bg);}
+.about-page .page-banner{background:linear-gradient(135deg,#0B2E55,#0A0E14);padding:3.2rem 8%;margin:-4rem -8% 3.2rem;border-bottom:3px solid var(--gold);}
+[data-theme="dark"] .about-page .page-banner{background:linear-gradient(135deg,#06182C,#05070A);}
+.about-page .page-banner h1{font-family:var(--ff-display);font-size:2.4rem;font-weight:600;color:#fff;}
+
+/* ─── TEAM ─── */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;margin-top:1.8rem;}
+.team-card{border:1px solid var(--border-color);background:var(--card-bg);padding:1.8rem 1.4rem;text-align:center;transition:border-color .2s,box-shadow .2s,background .3s;}
+.team-card:hover{border-color:var(--gold);box-shadow:0 8px 32px rgba(0,0,0,.1);}
+.team-avatar{width:58px;height:58px;border-radius:50%;background:#0B2E55;margin:0 auto .9rem;display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:1.25rem;font-weight:600;color:#fff;transition:transform .35s cubic-bezier(.34,1.56,.64,1);}
+[data-theme="dark"] .team-avatar{background:#06182C;}
+.team-card:hover .team-avatar{transform:rotate(8deg) scale(1.08);}
+.team-card h3{font-family:var(--ff-utility);font-weight:700;font-size:.86rem;color:var(--text-primary);}
+.team-card .role{font-size:.76rem;color:var(--text-secondary);margin-top:.3rem;}
+
+/* ─── FAQ ─── */
+.faq-section{padding:4rem 8%;background:var(--section-alt2);}
+.faq-section h2{font-family:var(--ff-display);font-size:1.9rem;font-weight:600;color:var(--text-primary);text-align:center;margin-bottom:2.2rem;}
+.faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:.6rem;}
+.faq-item{border:1px solid var(--border-color);background:var(--card-bg);transition:background .3s,border-color .3s;}
+.faq-q{padding:1rem 1.3rem;cursor:pointer;font-family:var(--ff-utility);font-size:.81rem;font-weight:600;letter-spacing:.03em;color:var(--text-primary);display:flex;justify-content:space-between;align-items:center;transition:background .2s;}
+.faq-q:hover{background:var(--section-alt);}
+.faq-arrow{width:23px;height:23px;flex-shrink:0;border:1px solid var(--border-color);display:flex;align-items:center;justify-content:center;transition:transform .25s,background .2s;}
+.faq-arrow svg{width:10px;height:10px;stroke:var(--forest);transition:stroke .2s;}
+[data-theme="dark"] .faq-arrow svg{stroke:#7CC9EE;}
+.faq-item.open .faq-arrow{transform:rotate(180deg);background:var(--forest);}
+[data-theme="dark"] .faq-item.open .faq-arrow{background:#16467F;}
+.faq-item.open .faq-arrow svg{stroke:#fff;}
+.faq-a{padding:0 1.3rem;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;font-size:.83rem;color:var(--text-secondary);line-height:1.7;}
+.faq-item.open .faq-a{max-height:200px;padding:.2rem 1.3rem 1rem;}
+
+/* ─── FOOTER ─── */
+.footer{background:#0A0E14;padding:3.5rem 8% 1.8rem;transition:background .3s;}
+[data-theme="dark"] .footer{background:#05070A;}
+.footer-grid{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:2.6rem;padding-bottom:2.6rem;border-bottom:1px solid rgba(255,255,255,.08);}
+.footer-brand .brand-name{font-family:var(--ff-utility);font-size:.82rem;font-weight:700;letter-spacing:.16em;color:#fff;text-transform:uppercase;}
+.footer-brand .brand-sub{font-family:var(--ff-body);font-size:.6rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-top:.2rem;}
+.footer-brand p{font-size:.81rem;color:rgba(255,255,255,.4);margin-top:.9rem;line-height:1.7;max-width:270px;}
+.footer h4{font-family:var(--ff-utility);font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1.1rem;}
+.footer ul{list-style:none;display:flex;flex-direction:column;gap:.65rem;}
+.footer ul a{color:rgba(255,255,255,.55);text-decoration:none;font-size:.81rem;transition:color .2s;}
+.footer ul a:hover{color:var(--gold2);}
+.footer-wh{font-size:.81rem;color:rgba(255,255,255,.45);line-height:1.85;}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.3rem;font-family:var(--ff-utility);font-size:.68rem;letter-spacing:.08em;color:rgba(255,255,255,.25);}
+.footer-bottom a{color:rgba(255,255,255,.3);text-decoration:none;}
+
+/* ─── PAGES TOGGLE ─── */
+.page{display:none;}
+.page.active{display:block;}
+
+/* ─── MODALS ─── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.modal-overlay.show{display:flex;}
+.modal-box{background:var(--card-bg);padding:2.2rem;max-width:400px;width:90%;text-align:center;border-top:3px solid var(--gold);animation:modal-in .3s ease;}
+@keyframes modal-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.modal-icon{margin-bottom:1rem;}
+.modal-icon svg{width:40px;height:40px;stroke:var(--forest);}
+[data-theme="dark"] .modal-icon svg{stroke:#7CC9EE;}
+.modal-box h3{font-family:var(--ff-display);font-size:1.3rem;font-weight:600;color:var(--text-primary);margin-bottom:.5rem;}
+.modal-box p{font-size:.86rem;color:var(--text-secondary);margin-bottom:1.4rem;line-height:1.6;}
+.modal-close{background:var(--forest);color:#fff;border:none;padding:.6rem 1.8rem;font-family:var(--ff-utility);font-size:.73rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+.modal-close:hover{background:#0A0E14;}
+
+/* ─── REVEAL ANIMATIONS ─── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-24px);transition:opacity .8s ease,transform .8s ease;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(24px);transition:opacity .8s ease,transform .8s ease;}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+
+/* ─── MICRO-ANIMATIONS ─── */
+@keyframes gentle-pulse{0%,100%{box-shadow:0 0 0 0 rgba(63,169,224,.45);}50%{box-shadow:0 0 0 7px rgba(63,169,224,0);}}
+.nav-cta{animation:gentle-pulse 2.6s ease-in-out infinite;}
+@keyframes fade-slide-in{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.page.active{animation:fade-slide-in .5s ease both;}
+.service-card{animation:fade-slide-in .6s ease both;}
+.service-card:nth-child(1){animation-delay:.05s;}
+.service-card:nth-child(2){animation-delay:.15s;}
+.service-card:nth-child(3){animation-delay:.25s;}
+.service-card:nth-child(4){animation-delay:.35s;}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1100px){
+  .cards-grid,.provide-grid{grid-template-columns:repeat(2,1fr);}
+  .testi-grid{grid-template-columns:repeat(2,1fr);}
+  .stats-band{grid-template-columns:repeat(2,1fr);}
+  .stats-band .stat-cell:nth-child(2){border-right:none;}
+  .services-strip .header{flex-direction:column;align-items:flex-start;gap:1rem;}
+}
+@media(max-width:900px){
+  .navbar{padding:.7rem 1.5rem;}
+  .hero{height:380px;}
+  .slide-content h1{font-size:2.1rem;}
+  .about-split{grid-template-columns:1fr;}
+  .about-img-side{height:280px;}
+  .why-section,.progress-section{grid-template-columns:1fr;gap:2.5rem;}
+  .contact-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .timeline::before{left:16px;}
+  .tl-item,.tl-item:nth-child(even){justify-content:flex-start;padding-right:0;padding-left:3rem;}
+  .tl-dot{left:16px;}
+  .avail-band{flex-direction:column;text-align:center;}
+  .blog-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:640px){
+  html{font-size:14px;}
+  .navbar{flex-wrap:wrap;gap:.6rem;padding:.6rem 1rem;}
+  .nav-links{gap:1.1rem;flex-wrap:wrap;}
+  .hero{height:340px;padding:0 6% 2.5rem;}
+  .slide-content h1{font-size:1.7rem;}
+  .cards-grid,.provide-grid,.testi-grid,.team-grid{grid-template-columns:1fr;}
+  .stats-band{grid-template-columns:repeat(2,1fr);padding:1.4rem 6%;}
+  .stat-num{font-size:1.6rem;}
+  .footer-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .blog-grid{grid-template-columns:1fr;}
+  .section-title{font-size:1.7rem;}
+  .ticker-bar{padding:.5rem 1rem;}
+  .ticker-scroll{display:none;}
+  .ticker-clock{gap:.8rem;}
+  .theme-dropdown{width:210px;left:0;right:auto;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ TICKER BAR ══ -->
+<div class="ticker-bar">
+  <div class="ticker-clock">
+    <span class="time" id="live-time">—</span>
+    <div class="ticker-divider"></div>
+    <span class="date" id="live-date">—</span>
+  </div>
+  <div class="ticker-scroll">
+    <div class="ticker-track" id="ticker-track">
+      <span class="ticker-item"><span class="ticker-dot"></span>Sydney Depot — Operational</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Dubai Transit Hub — Operational</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>London Heathrow Cargo — Operational</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Singapore Air Hub — Operational</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Lagos Port Office — Operational</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>New York JFK Freight — Operational</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>São Paulo Hub — Operational</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Sydney Depot — Operational</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Dubai Transit Hub — Operational</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>London Heathrow Cargo — Operational</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Singapore Air Hub — Operational</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Texa Port Office — Operational</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>New York JFK Freight — Operational</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>São Paulo Hub — Operational</span>
+    </div>
+  </div>
+  <div class="ticker-email"><a href="mailto:info@swiftexpressdelivery.com">info@swiftexpressdelivery.com</a></div>
+</div>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar" id="navbar">
+  <a class="logo-wrap" href="#" onclick="showPage('home');return false;">
+    <svg class="logo-svg-wrap" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;width:48px;height:48px;">
+      <defs>
+        <clipPath id="globe-clip"><circle cx="24" cy="24" r="17"/></clipPath>
+      </defs>
+      <circle cx="24" cy="24" r="17" fill="#0B2E55" stroke="#16467F" stroke-width="1"/>
+      <g style="animation:globe-rotate 7s linear infinite;transform-origin:24px 24px;" clip-path="url(#globe-clip)">
+        <ellipse cx="24" cy="24" rx="17" ry="5.5" fill="none" stroke="#16467F" stroke-width="0.7" opacity="0.8"/>
+        <ellipse cx="24" cy="24" rx="17" ry="11" fill="none" stroke="#16467F" stroke-width="0.5" opacity="0.5"/>
+        <ellipse cx="24" cy="24" rx="5" ry="17" fill="none" stroke="#16467F" stroke-width="0.6" opacity="0.7"/>
+        <ellipse cx="24" cy="24" rx="11" ry="17" fill="none" stroke="#16467F" stroke-width="0.5" opacity="0.5"/>
+        <ellipse cx="19" cy="17" rx="5.5" ry="3.8" fill="#3FA9E0" opacity="0.9"/>
+        <ellipse cx="30" cy="19" rx="3.8" ry="5" fill="#3FA9E0" opacity="0.8"/>
+        <ellipse cx="17" cy="28" rx="3.2" ry="2.7" fill="#3FA9E0" opacity="0.75"/>
+        <ellipse cx="29" cy="30" rx="4.2" ry="3" fill="#3FA9E0" opacity="0.85"/>
+        <ellipse cx="22" cy="33" rx="2.5" ry="2.2" fill="#3FA9E0" opacity="0.65"/>
+      </g>
+      <line x1="7" y1="24" x2="41" y2="24" stroke="#16467F" stroke-width="0.5" opacity="0.4"/>
+      <circle cx="24" cy="24" r="17" fill="none" stroke="#4FB6E8" stroke-width="1.2" opacity="0.55"/>
+      <g style="animation:orbit-rotate 3.5s linear infinite;transform-origin:24px 24px;">
+        <ellipse cx="24" cy="24" rx="23.5" ry="8.5" fill="none" stroke="#3FA9E0" stroke-width="1.3" stroke-dasharray="3 2" opacity="0.95"/>
+        <circle cx="47.5" cy="24" r="2.8" fill="#3FA9E0"/>
+      </g>
+      <g style="animation:orbit-rotate2 5s linear infinite;transform-origin:24px 24px;">
+        <ellipse cx="24" cy="24" rx="8.5" ry="23.5" fill="none" stroke="#7CC9EE" stroke-width="0.9" stroke-dasharray="2.5 3" opacity="0.55"/>
+        <circle cx="24" cy="0.5" r="2" fill="#7CC9EE" opacity="0.85"/>
+      </g>
+      <ellipse cx="18" cy="17" rx="5.5" ry="3.5" fill="white" opacity="0.06"/>
+    </svg>
+    <div class="logo-text-block">
+      <span class="logo-brand">Swift-<span class="logo-accent">Express</span> <span class="logo-delivery">-Delivery-Company</span></span>
+      <span class="logo-sub">✈️-Always at your Service-🚚</span>
+    </div>
+  </a>
+
+  <div style="display:flex;align-items:center;gap:1.4rem;">
+    <div class="theme-switcher" id="themeSwitcher">
+      <button class="theme-btn" onclick="toggleThemeMenu(event)" type="button" aria-label="Switch theme">
+        <span class="theme-btn-icon" id="themeIcon">☀️</span>
+        <span id="themeLabel">Light</span>
+        <svg class="theme-chevron" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="theme-dropdown" id="themeDropdown">
+        <div class="theme-option active" id="opt-light" onclick="setTheme('light')">
+          <span class="theme-opt-icon">☀️</span>
+          <div>
+            <div class="theme-opt-name">Light Mode</div>
+            <div class="theme-opt-desc">Clean, bright interface</div>
+          </div>
+          <span class="theme-check" id="check-light">✓</span>
+        </div>
+        <div class="theme-option" id="opt-dark" onclick="setTheme('dark')">
+          <span class="theme-opt-icon">🌙</span>
+          <div>
+            <div class="theme-opt-name">Dark Mode</div>
+            <div class="theme-opt-desc">Easy on the eyes</div>
+          </div>
+          <span class="theme-check" id="check-dark"></span>
+        </div>
+      </div>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#" onclick="showPage('home');return false;">Home</a></li>
+      <li><a href="#" onclick="showPage('track');return false;">Track</a></li>
+      <li><a href="#" onclick="showPage('about');return false;">About</a></li>
+      <li><a href="#" onclick="showPage('services');return false;">Services</a></li>
+      <li><a href="#" onclick="showPage('contact');return false;">Contact</a></li>
+      <li><a href="#" onclick="showPage('appointment');return false;" class="nav-cta">Book Appointment</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<!-- ══════════════ HOME PAGE ══════════════ -->
+<div id="page-home" class="page active">
+
+  <div class="hero">
+    <div class="slide-content">
+      <div class="slide-eyebrow">Global Logistics Leader</div>
+      <h1>Elevating the World of Logistics.</h1>
+      <p>The world's largest retailers and brands rely on Swift Express Delivery Company to move fast, at scale, with absolute precision.</p>
+      <a href="#" class="btn-primary" onclick="showPage('track');return false;">
+        Track Shipment
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="services-strip">
+    <div class="header">
+      <div class="header-left reveal">
+        <div class="section-eyebrow">What We Do</div>
+        <h2 class="section-title">Core Services</h2>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="service-card reveal">
+        <div class="scard-visual">
+          <div class="scard-livery"></div>
+          <img class="scard-bg" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=85" alt="Air Freight"/>
+          <div class="scard-brand-plate">
+            <div class="scard-brand-name">Swift<em>Express</em></div>
+            <svg class="scard-logo-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;width:26px;height:26px;">
+              <defs><clipPath id="sg-clip1"><circle cx="14" cy="14" r="10"/></clipPath></defs>
+              <circle cx="14" cy="14" r="10" fill="#0B2E55"/>
+              <g style="animation:globe-rotate 7s linear infinite;transform-origin:14px 14px;" clip-path="url(#sg-clip1)">
+                <ellipse cx="14" cy="14" rx="10" ry="3.5" fill="none" stroke="#16467F" stroke-width="0.5" opacity="0.8"/>
+                <ellipse cx="14" cy="14" rx="3.5" ry="10" fill="none" stroke="#16467F" stroke-width="0.5" opacity="0.7"/>
+                <ellipse cx="11" cy="11" rx="3.2" ry="2.2" fill="#3FA9E0" opacity="0.9"/>
+                <ellipse cx="17.5" cy="13" rx="2.2" ry="2.8" fill="#3FA9E0" opacity="0.8"/>
+                <ellipse cx="13" cy="18" rx="2.8" ry="2" fill="#3FA9E0" opacity="0.75"/>
+              </g>
+              <circle cx="14" cy="14" r="10" fill="none" stroke="#4FB6E8" stroke-width="0.8" opacity="0.55"/>
+              <g style="animation:orbit-rotate 3.5s linear infinite;transform-origin:14px 14px;">
+                <ellipse cx="14" cy="14" rx="13.5" ry="5" fill="none" stroke="#3FA9E0" stroke-width="0.9" stroke-dasharray="2 1.5" opacity="0.95"/>
+                <circle cx="27.5" cy="14" r="1.6" fill="#3FA9E0"/>
+              </g>
+            </svg>
+          </div>
+          <div class="scard-badge">Air</div>
+        </div>
+        <div class="scard-body">
+          <h3>Air Freight</h3>
+          <p>Fast, secure global delivery via a network of premier airlines. All cargo sizes — urgent or standard.</p>
+          <a href="#" class="scard-link" onclick="showPage('services');return false;">Learn More <svg viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1l4 4.5L6 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="scard-visual">
+          <div class="scard-livery"></div>
+          <img class="scard-bg" src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&q=85" alt="Road Freight"/>
+          <div class="scard-brand-plate">
+            <div class="scard-brand-name">Swift<em>Express</em></div>
+            <svg class="scard-logo-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;width:26px;height:26px;">
+              <defs><clipPath id="sg-clip2"><circle cx="14" cy="14" r="10"/></clipPath></defs>
+              <circle cx="14" cy="14" r="10" fill="#0B2E55"/>
+              <g style="animation:globe-rotate 7s linear infinite;transform-origin:14px 14px;" clip-path="url(#sg-clip2)">
+                <ellipse cx="14" cy="14" rx="10" ry="3.5" fill="none" stroke="#16467F" stroke-width="0.5" opacity="0.8"/>
+                <ellipse cx="14" cy="14" rx="3.5" ry="10" fill="none" stroke="#16467F" stroke-width="0.5" opacity="0.7"/>
+                <ellipse cx="11" cy="11" rx="3.2" ry="2.2" fill="#3FA9E0" opacity="0.9"/>
+                <ellipse cx="17.5" cy="13" rx="2.2" ry="2.8" fill="#3FA9E0" opacity="0.8"/>
+                <ellipse cx="13" cy="18" rx="2.8" ry="2" fill="#3FA9E0" opacity="0.75"/>
+              </g>
+              <circle cx="14" cy="14" r="10" fill="none" stroke="#4FB6E8" stroke-width="0.8" opacity="0.55"/>
+              <g style="animation:orbit-rotate 3.5s linear infinite;transform-origin:14px 14px;">
+                <ellipse cx="14" cy="14" rx="13.5" ry="5" fill="none" stroke="#3FA9E0" stroke-width="0.9" stroke-dasharray="2 1.5" opacity="0.95"/>
+                <circle cx="27.5" cy="14" r="1.6" fill="#3FA9E0"/>
+              </g>
+            </svg>
+          </div>
+          <div class="scard-badge">Road</div>
+        </div>
+        <div class="scard-body">
+          <h3>Road Freight</h3>
+          <p>Safe, efficient overland transport with a branded fleet, flexible scheduling, and live tracking.</p>
+          <a href="#" class="scard-link" onclick="showPage('services');return false;">Learn More <svg viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1l4 4.5L6 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="scard-visual">
+          <div class="scard-livery"></div>
+          <img class="scard-bg" src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=800&q=85" alt="Ocean Freight"/>
+          <div class="scard-brand-plate">
+            <div class="scard-brand-name">Swift<em>Express</em></div>
+            <svg class="scard-logo-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;width:26px;height:26px;">
+              <defs><clipPath id="sg-clip3"><circle cx="14" cy="14" r="10"/></clipPath></defs>
+              <circle cx="14" cy="14" r="10" fill="#0B2E55"/>
+              <g style="animation:globe-rotate 7s linear infinite;transform-origin:14px 14px;" clip-path="url(#sg-clip3)">
+                <ellipse cx="14" cy="14" rx="10" ry="3.5" fill="none" stroke="#16467F" stroke-width="0.5" opacity="0.8"/>
+                <ellipse cx="14" cy="14" rx="3.5" ry="10" fill="none" stroke="#16467F" stroke-width="0.5" opacity="0.7"/>
+                <ellipse cx="11" cy="11" rx="3.2" ry="2.2" fill="#3FA9E0" opacity="0.9"/>
+                <ellipse cx="17.5" cy="13" rx="2.2" ry="2.8" fill="#3FA9E0" opacity="0.8"/>
+                <ellipse cx="13" cy="18" rx="2.8" ry="2" fill="#3FA9E0" opacity="0.75"/>
+              </g>
+              <circle cx="14" cy="14" r="10" fill="none" stroke="#4FB6E8" stroke-width="0.8" opacity="0.55"/>
+              <g style="animation:orbit-rotate 3.5s linear infinite;transform-origin:14px 14px;">
+                <ellipse cx="14" cy="14" rx="13.5" ry="5" fill="none" stroke="#3FA9E0" stroke-width="0.9" stroke-dasharray="2 1.5" opacity="0.95"/>
+                <circle cx="27.5" cy="14" r="1.6" fill="#3FA9E0"/>
+              </g>
+            </svg>
+          </div>
+          <div class="scard-badge">Sea</div>
+        </div>
+        <div class="scard-body">
+          <h3>Ocean Freight</h3>
+          <p>Cost-effective, eco-responsible sea shipping leveraging tier-one carrier partnerships worldwide.</p>
+          <a href="#" class="scard-link" onclick="showPage('services');return false;">Learn More <svg viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1l4 4.5L6 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="scard-visual">
+          <div class="scard-livery"></div>
+          <img class="scard-bg" src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=800&q=85" alt="International Freight"/>
+          <div class="scard-brand-plate">
+            <div class="scard-brand-name">Swift<em>Express</em></div>
+            <svg class="scard-logo-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;width:26px;height:26px;">
+              <defs><clipPath id="sg-clip4"><circle cx="14" cy="14" r="10"/></clipPath></defs>
+              <circle cx="14" cy="14" r="10" fill="#0B2E55"/>
+              <g style="animation:globe-rotate 7s linear infinite;transform-origin:14px 14px;" clip-path="url(#sg-clip4)">
+                <ellipse cx="14" cy="14" rx="10" ry="3.5" fill="none" stroke="#16467F" stroke-width="0.5" opacity="0.8"/>
+                <ellipse cx="14" cy="14" rx="3.5" ry="10" fill="none" stroke="#16467F" stroke-width="0.5" opacity="0.7"/>
+                <ellipse cx="11" cy="11" rx="3.2" ry="2.2" fill="#3FA9E0" opacity="0.9"/>
+                <ellipse cx="17.5" cy="13" rx="2.2" ry="2.8" fill="#3FA9E0" opacity="0.8"/>
+                <ellipse cx="13" cy="18" rx="2.8" ry="2" fill="#3FA9E0" opacity="0.75"/>
+              </g>
+              <circle cx="14" cy="14" r="10" fill="none" stroke="#4FB6E8" stroke-width="0.8" opacity="0.55"/>
+              <g style="animation:orbit-rotate 3.5s linear infinite;transform-origin:14px 14px;">
+                <ellipse cx="14" cy="14" rx="13.5" ry="5" fill="none" stroke="#3FA9E0" stroke-width="0.9" stroke-dasharray="2 1.5" opacity="0.95"/>
+                <circle cx="27.5" cy="14" r="1.6" fill="#3FA9E0"/>
+              </g>
+            </svg>
+          </div>
+          <div class="scard-badge">Global</div>
+        </div>
+        <div class="scard-body">
+          <h3>International Freight</h3>
+          <p>Navigating customs and global regulations — delivering anywhere with speed, security, and clarity.</p>
+          <a href="#" class="scard-link" onclick="showPage('services');return false;">Learn More <svg viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6 1l4 4.5L6 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-split">
+    <div class="about-img-side reveal-left">
+      <img src="https://images.unsplash.com/photo-1601598851547-4302969d0614?w=900&q=85" alt="Warehouse Operations"/>
+      <div class="about-img-overlay"></div>
+      <div class="about-badge"><div class="num">29+</div><div class="lbl">Years of Excellence</div></div>
+    </div>
+    <div class="about-text-side reveal-right">
+      <div class="section-eyebrow">Our Story</div>
+      <h2 class="section-title">Built on Trust.<br><em>Driven by Precision.</em></h2>
+      <p class="section-body">Founded in 1995 in South Australia, Swift Express Delivery Company began as a vision to redefine what logistics could be. Today, 47 offices across 5 continents stand as proof. We are not just a carrier — we are architects of seamless supply chains, moving what matters for businesses of every scale.</p>
+      <a href="#" class="btn-outline" onclick="showPage('about');return false;">Our Full Story <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="stats-band">
+    <div class="stat-cell"><div class="stat-num"><span class="counter" data-target="50000">0</span><span class="stat-suffix">+</span></div><div class="stat-lbl">Packages Shipped</div></div>
+    <div class="stat-cell"><div class="stat-num"><span class="counter" data-target="12000">0</span></div><div class="stat-lbl">Goods Insured</div></div>
+    <div class="stat-cell"><div class="stat-num"><span class="counter" data-target="47">0</span></div><div class="stat-lbl">Global Offices</div></div>
+    <div class="stat-cell"><div class="stat-num"><span class="counter" data-target="3200">0</span><span class="stat-suffix">+</span></div><div class="stat-lbl">Professionals</div></div>
+  </div>
+
+  <div class="why-section">
+    <div class="why-img reveal-left">
+      <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=800&q=85" alt="Logistics Operations"/>
+      <div class="why-img-line"></div>
+    </div>
+    <div class="reveal-right">
+      <div class="section-eyebrow">Our Advantage</div>
+      <h2 class="section-title">Why the World Chooses Swift Express</h2>
+      <p class="section-body" style="margin-top:.8rem;">A logistics network engineered to adapt, scale, and outperform — no matter the complexity.</p>
+      <div class="why-items">
+        <div class="why-item"><div class="why-check"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 3 4.5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span class="why-item-text">Cost-effective Solutions</span></div>
+        <div class="why-item"><div class="why-check"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 3 4.5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span class="why-item-text">High Cargo Capacity</span></div>
+        <div class="why-item"><div class="why-check"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 3 4.5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span class="why-item-text">Suitable for Heavy Goods</span></div>
+        <div class="why-item"><div class="why-check"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 3 4.5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span class="why-item-text">Long-term Contracts</span></div>
+        <div class="why-item"><div class="why-check"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 3 4.5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span class="why-item-text">Trade Routes Optimisation</span></div>
+        <div class="why-item"><div class="why-check"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 3 4.5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span class="why-item-text">Reliable Schedules</span></div>
+        <div class="why-item"><div class="why-check"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 3 4.5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span class="why-item-text">Access to Remote Areas</span></div>
+        <div class="why-item"><div class="why-check"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 3 4.5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span class="why-item-text">Environmental Responsibility</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="provide-section">
+    <div class="provide-header">
+      <div class="section-eyebrow">Capabilities</div>
+      <h2 class="section-title">What We Provide</h2>
+    </div>
+    <div class="provide-grid">
+      <div class="provide-card reveal"><h3>Freight Forwarding</h3><p>Efficient, reliable forwarding for domestic and international shipments through our extensive carrier network.</p></div>
+      <div class="provide-card reveal"><h3>Warehousing</h3><p>Secure, cost-effective storage with advanced surveillance and inventory management systems.</p></div>
+      <div class="provide-card reveal"><h3>Customs Clearance</h3><p>Full regulatory compliance — our experienced brokers ensure every shipment clears without delay.</p></div>
+      <div class="provide-card reveal"><h3>Specialised Services</h3><p>Bespoke logistics for unique cargo — hazardous materials, time-critical, and high-value consignments.</p></div>
+    </div>
+  </div>
+
+  <div class="progress-section">
+    <div class="progress-text reveal-left">
+      <div class="section-eyebrow">Performance</div>
+      <h2 class="section-title">Our Track Record Speaks.</h2>
+      <p class="section-body">Better respond to disruptions and shifts in the global marketplace. Swift Express Delivery Company is the infrastructure your supply chain depends on.</p>
+      <a href="mailto:info@swiftexpressdelivery.com" style="color:var(--gold);font-size:.83rem;font-family:var(--ff-utility);letter-spacing:.06em;">info@swiftexpressdelivery.com</a>
+    </div>
+    <div class="bars reveal-right">
+      <div class="bar-item"><label><span>Orders Received</span><span class="pct">89%</span></label><div class="bar-track"><div class="bar-fill" data-width="89"></div></div></div>
+      <div class="bar-item"><label><span>Custom Clearance</span><span class="pct">89%</span></label><div class="bar-track"><div class="bar-fill" data-width="89"></div></div></div>
+      <div class="bar-item"><label><span>Customer Satisfaction</span><span class="pct">97%</span></label><div class="bar-track"><div class="bar-fill" data-width="97"></div></div></div>
+      <div class="bar-item"><label><span>On-Time Delivery</span><span class="pct">94%</span></label><div class="bar-track"><div class="bar-fill" data-width="94"></div></div></div>
+    </div>
+  </div>
+
+  <div class="testimonials">
+    <div class="testi-header">
+      <div><div class="section-eyebrow">Client Voices</div><h2 class="section-title">Stories of Trust</h2></div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal"><div class="stars">★★★★★</div><div class="t-quote">"</div><p class="t-body">Swift Express's support team was incredibly helpful from the very first inquiry. Our goods arrived ahead of schedule.</p><div class="t-author">John Paul</div><div class="t-role">CEO, McLain Group</div></div>
+      <div class="testi-card reveal"><div class="stars">★★★★★</div><div class="t-quote">"</div><p class="t-body">Always reliable, timely, and cost-effective. I recommend Swift Express to every business owner I know.</p><div class="t-author">Mark Jones</div><div class="t-role">Senior Marketer</div></div>
+      <div class="testi-card reveal"><div class="stars">★★★★★</div><div class="t-quote">"</div><p class="t-body">Top-notch customer service and highly competitive rates. Never had a single issue in three years of partnership.</p><div class="t-author">Mark Williams</div><div class="t-role">Director, MedSupply</div></div>
+      <div class="testi-card reveal"><div class="stars">★★★★★</div><div class="t-quote">"</div><p class="t-body">Professional, efficient, and guided me through international customs flawlessly. Exceptional service.</p><div class="t-author">Steven Adeyemi</div><div class="t-role">Operations Manager, COPA</div></div>
+    </div>
+  </div>
+
+  <div class="avail-band">
+    <div class="av-text">
+      <h2 class="section-title">24 / 7 Global Availability</h2>
+      <p class="section-body">Supply chain management, warehousing, distribution, and transportation — all hours, all time zones.</p>
+    </div>
+    <a href="#" class="btn-gold" onclick="showPage('contact');return false;">Contact Us Now</a>
+  </div>
+
+  <div class="blog-section">
+    <div class="blog-header reveal">
+      <div><div class="section-eyebrow">Insights</div><h2 class="section-title">Latest from Swift Express</h2></div>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card reveal"><img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=700&q=80" alt="Air Freight"/><div class="blog-body"><div class="blog-tag">Air Freight</div><h3>Air Shipping — Fast, Reliable, and Global with Swift Express</h3><div class="blog-meta"><span>Jun 2025</span><a href="#">Read More →</a></div></div></div>
+      <div class="blog-card reveal"><img src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=700&q=80" alt="Customs"/><div class="blog-body"><div class="blog-tag">Customs Clearance</div><h3>How Swift Express Simplifies International Customs</h3><div class="blog-meta"><span>May 2025</span><a href="#">Read More →</a></div></div></div>
+      <div class="blog-card reveal"><img src="https://images.unsplash.com/photo-1559526324-593bc073d938?w=700&q=80" alt="Insurance"/><div class="blog-body"><div class="blog-tag">Cargo Insurance</div><h3>Protect What You Ship — Our Comprehensive Insurance Services</h3><div class="blog-meta"><span>Apr 2025</span><a href="#">Read More →</a></div></div></div>
+    </div>
+  </div>
+
+</div><!-- /home -->
+
+
+<!-- ══════════════ TRACK PAGE ══════════════ -->
+<div id="page-track" class="page">
+  <div class="track-section" style="min-height:65vh;display:flex;flex-direction:column;justify-content:center;">
+    <div class="track-inner">
+      <div class="section-eyebrow">Real-Time Visibility</div>
+      <h2 class="section-title">Track Your Shipment</h2>
+      <p class="section-body">Enter your tracking reference to get live status updates on your consignment.</p>
+      <div class="track-box">
+        <input type="text" id="track-input" placeholder="e.g. SWEX-2025-78432" onkeydown="if(event.key==='Enter')doTrack()"/>
+        <button onclick="doTrack()">Track</button>
+      </div>
+      <div class="track-result" id="track-result">
+        <div class="track-status" id="track-status"></div>
+        <ul class="track-steps" id="track-steps"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════ ABOUT PAGE ══════════════ -->
+<div id="page-about" class="page">
+  <div class="about-page">
+    <div class="page-banner">
+      <h1>About Swift Express Delivery Company</h1>
+      <p style="color:rgba(255,255,255,.5);margin-top:.5rem;font-size:.9rem;">Trusted logistics partner since 1995.</p>
+    </div>
+    <div class="about-split" style="margin:0 -8% 4rem;">
+      <div class="about-img-side" style="min-height:380px;">
+        <img src="https://images.unsplash.com/photo-1601598851547-4302969d0614?w=900&q=85" alt="Warehouse"/>
+        <div class="about-img-overlay"></div>
+        <div class="about-badge"><div class="num">47</div><div class="lbl">Global Offices</div></div>
+      </div>
+      <div class="about-text-side">
+        <div class="section-eyebrow">Our Story</div>
+        <h2 class="section-title">About Swift Express Delivery Company</h2>
+        <p class="section-body">We are committed to delivering exceptional shipping services that are reliable, safe, and cost-effective. With over 29 years in the logistics industry, we have become a trusted name across five continents.</p>
+        <p class="section-body" style="margin-top:1rem;">Founded in 1995 in South Australia, we have since expanded to 47 head offices worldwide — South America, Europe, Asia, and Africa — providing end-to-end logistics solutions backed by a global network of partners.</p>
+      </div>
+    </div>
+    <div class="timeline-section" style="padding:3.5rem 0;background:transparent;">
+      <div class="timeline-header"><div class="section-eyebrow">Our Journey</div><h2 class="section-title">Company Milestones</h2></div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-card"><div class="tl-year">March 1995 — South Australia</div><h3>Founded</h3><p>A vision to redefine logistics. Swift Express Delivery Company was born with a commitment to precision and reliability that endures to this day.</p></div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-card"><div class="tl-year">May 2002 — Sydney</div><h3>Mission Defined</h3><p>Established as the driving force behind global commerce — providing innovative, tailored logistics solutions that empower businesses to thrive.</p></div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-card"><div class="tl-year">September 2012 — Tasmania</div><h3>Continental Expansion</h3><p>Opened 30th international office, marking our presence across all five continents with a unified commitment to excellence.</p></div></div>
+      </div>
+    </div>
+    <div style="margin-top:1rem;">
+      <div class="section-eyebrow">Our People</div>
+      <h2 class="section-title" style="margin-bottom:1.8rem;">Meet Our Leadership</h2>
+      <div class="team-grid">
+        <div class="team-card reveal"><div class="team-avatar">AS</div><h3>Alexi Stokes</h3><div class="role">Warehouse Manager</div></div>
+        <div class="team-card reveal"><div class="team-avatar">AL</div><h3>Alissa Leonard</h3><div class="role">Executive Secretary</div></div>
+        <div class="team-card reveal"><div class="team-avatar">GM</div><h3>Georgia Mcneil</h3><div class="role">Operations Lead</div></div>
+      </div>
+    </div>
+    <div class="testimonials" style="margin:3.5rem -8% 0;padding:3.5rem 8%;">
+      <div class="testi-header"><div><div class="section-eyebrow">Client Voices</div><h2 class="section-title">Stories From Our Clients</h2></div></div>
+      <div class="testi-grid">
+        <div class="testi-card"><div class="stars">★★★★★</div><div class="t-quote">"</div><p class="t-body">Swift Express's support team was incredibly helpful from the very first inquiry.</p><div class="t-author">John Paul</div><div class="t-role">CEO, McLain Group</div></div>
+        <div class="testi-card"><div class="stars">★★★★★</div><div class="t-quote">"</div><p class="t-body">Always reliable, timely, and cost-effective. Highly recommended to all.</p><div class="t-author">Mark Jones</div><div class="t-role">Senior Marketer</div></div>
+        <div class="testi-card"><div class="stars">★★★★★</div><div class="t-quote">"</div><p class="t-body">Top-notch service and very competitive rates. Never had a single issue.</p><div class="t-author">Mark Williams</div><div class="t-role">Director, MedSupply</div></div>
+        <div class="testi-card"><div class="stars">★★★★★</div><div class="t-quote">"</div><p class="t-body">Professional, efficient, and helped me navigate customs on my overseas move.</p><div class="t-author">Steven Adeyemi</div><div class="t-role">Manager, COPA</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════ SERVICES PAGE ══════════════ -->
+<div id="page-services" class="page">
+  <div class="services-full">
+    <div class="page-banner"><h1>Our Services</h1><p>Comprehensive logistics solutions, built for scale.</p></div>
+    <div class="cards-grid" style="margin-bottom:3.5rem;">
+      <div class="service-card reveal"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Air Freight</h3><p>Fast, secure global delivery via top airlines. All cargo sizes, urgent and regular needs.</p></div>
+      <div class="service-card reveal"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="1" y="10" width="15" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M16 13h3l3 3v3h-6v-6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="5.5" cy="18.5" r="2" stroke="currentColor" stroke-width="1.5"/><circle cx="18.5" cy="18.5" r="2" stroke="currentColor" stroke-width="1.5"/></svg></div><h3>Road Freight</h3><p>Safe, efficient road transport with a modern fleet, flexible scheduling, and real-time tracking.</p></div>
+      <div class="service-card reveal"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 15C3 12 5 6 12 6s9 6 9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M3 15h18M7 20l1-5M17 20l-1-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><h3>Ocean Freight</h3><p>Cost-effective, eco-friendly ocean shipping with major carrier partnerships worldwide.</p></div>
+      <div class="service-card reveal"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div><h3>Warehousing</h3><p>Secure, cost-effective warehousing with advanced security to protect your inventory.</p></div>
+      <div class="service-card reveal"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Customs Clearance</h3><p>Expert clearance ensuring full compliance with all international regulations.</p></div>
+      <div class="service-card reveal"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Cargo Insurance</h3><p>Comprehensive cover for loss, damage, and theft — total peace of mind on every shipment.</p></div>
+    </div>
+    <div class="avail-band" style="margin:0 -8%;">
+      <div class="av-text"><h2 class="section-title" style="color:#fff;font-size:1.7rem;">24/7 Availability</h2><p class="section-body" style="color:rgba(255,255,255,.6);">Available for all your logistics needs — engineering, distribution, transportation.</p></div>
+      <a href="#" class="btn-gold" onclick="showPage('contact');return false;">Contact Us</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════ APPOINTMENT PAGE ══════════════ -->
+<div id="page-appointment" class="page">
+  <div class="appt-section">
+    <div class="section-eyebrow" style="justify-content:center;">Schedule</div>
+    <h2>Book an Appointment</h2>
+    <p class="sub">Our team will confirm within 24 hours.</p>
+    <div class="appt-form-card">
+      <div class="form-row">
+        <div class="form-field"><label>Full Name</label><input type="text" placeholder="Your full name"/></div>
+        <div class="form-field"><label>Email Address</label><input type="email" placeholder="your@email.com"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-field"><label>Phone Number</label><input type="tel" placeholder="+1 000 000 0000"/></div>
+        <div class="form-field"><label>Preferred Date</label><input type="date"/></div>
+      </div>
+      <div class="form-field">
+        <label>Service Required</label>
+        <select><option value="">Select a service</option><option>Air Freight</option><option>Road Freight</option><option>Ocean Freight</option><option>International Freight</option><option>Warehousing</option><option>Customs Clearance</option><option>Cargo Insurance</option></select>
+      </div>
+      <div class="form-field"><label>Notes</label><textarea placeholder="Additional requirements or special instructions…"></textarea></div>
+      <button class="btn-submit" onclick="showModal('appt-modal')">Confirm Appointment</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════ CONTACT PAGE ══════════════ -->
+<div id="page-contact" class="page">
+  <div class="contact-grid">
+    <div class="contact-dark">
+      <div class="section-eyebrow">Get in Touch</div>
+      <h2 class="section-title" style="color:#fff;">Let's Talk Logistics.</h2>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.5"/></svg></div>
+          <div><div class="c-label">Email</div><div class="c-value">info@swiftexpressdelivery.com</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div><div class="c-label">Working Hours</div><div class="c-value">Mon–Fri: 8 AM – 8 PM<br>Sat–Sun: 8 AM – 5 PM</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/></svg></div>
+          <div><div class="c-label">Headquarters</div><div class="c-value">Tasmania, South Australia</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-light">
+      <h2>Send Us a Message</h2>
+      <div class="form-row">
+        <div class="form-field"><label>Your Name</label><input type="text" placeholder="Full name"/></div>
+        <div class="form-field"><label>Email Address</label><input type="email" placeholder="your@email.com"/></div>
+      </div>
+      <div class="form-field"><label>Message</label><textarea placeholder="How can we help?" style="height:120px;"></textarea></div>
+      <button class="btn-submit" onclick="showModal('contact-modal')">Send Message</button>
+    </div>
+  </div>
+
+  <div class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What type of cargo can Swift Express handle?<div class="faq-arrow"><svg viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div><div class="faq-a">We handle a wide range of cargo including documents, parcels, and pallets. We also specialise in the transportation of dangerous or hazardous goods with full regulatory compliance.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Does Swift Express provide insurance for my shipment?<div class="faq-arrow"><svg viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div><div class="faq-a">Yes, we offer comprehensive cargo insurance. Coverage terms apply — please consult our customer service team for a tailored policy to suit your shipment.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is the cost of shipping with Swift Express?<div class="faq-arrow"><svg viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div><div class="faq-a">Cost depends on weight, destination, mode of transportation, and shipment type. We offer competitive rates and provide customised quotes — contact us for an assessment.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Does Swift Express provide real-time tracking?<div class="faq-arrow"><svg viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div><div class="faq-a">Yes — all shipments include real-time tracking. You can track via our website or by contacting our customer service team at any time.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I change or cancel my shipment?<div class="faq-arrow"><svg viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div><div class="faq-a">Yes, changes or cancellations may be made. Applicable charges depend on the stage of shipment and the service selected. Contact us as early as possible.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What if my shipment is lost or damaged?<div class="faq-arrow"><svg viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div><div class="faq-a">We take every precaution to ensure safe delivery. In the unlikely event of loss or damage, our comprehensive claims process ensures fair and timely compensation.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Does Swift Express handle customs clearance?<div class="faq-arrow"><svg viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div><div class="faq-a">Yes — our expert team ensures full customs compliance for every international shipment, making the clearance process smooth and hassle-free.</div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" onclick="showPage('home');return false;" style="text-decoration:none;">
+        <div class="brand-name">Swift Express</div>
+        <div class="brand-sub">Delivery Company</div>
+      </a>
+      <p>Your seamless shipping solution. Trusted global logistics partner since 1995, operating across 47 offices worldwide.</p>
+    </div>
+    <div>
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#" onclick="showPage('home');return false;">Home</a></li>
+        <li><a href="#" onclick="showPage('services');return false;">Services</a></li>
+        <li><a href="#" onclick="showPage('track');return false;">Track Shipment</a></li>
+        <li><a href="#" onclick="showPage('appointment');return false;">Book Appointment</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#" onclick="showPage('about');return false;">About Us</a></li>
+        <li><a href="#" onclick="showPage('contact');return false;">Contact</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms &amp; Conditions</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Operating Hours</h4>
+      <p class="footer-wh">Mon – Fri: 8:00 AM – 8:00 PM<br>Sat – Sun: 8:00 AM – 5:00 PM<br><br>All major time zones served.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Swift Express Delivery Company. All Rights Reserved.</span>
+    <span><a href="#">Privacy</a> &nbsp;·&nbsp; <a href="#">Terms</a></span>
+  </div>
+</footer>
+
+
+<!-- MODALS -->
+<div class="modal-overlay" id="appt-modal">
+  <div class="modal-box">
+    <div class="modal-icon"><svg viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="20" stroke="#0B2E55" stroke-width="2"/><path d="M13 22l6 6 12-12" stroke="#0B2E55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h3>Appointment Confirmed</h3>
+    <p>Your appointment has been submitted. Our team will contact you within 24 hours to confirm the details.</p>
+    <button class="modal-close" onclick="closeModal('appt-modal')">Close</button>
+  </div>
+</div>
+<div class="modal-overlay" id="contact-modal">
+  <div class="modal-box">
+    <div class="modal-icon"><svg viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="20" stroke="#0B2E55" stroke-width="2"/><path d="M14 18h16M14 24h10" stroke="#0B2E55" stroke-width="2" stroke-linecap="round"/></svg></div>
+    <h3>Message Sent</h3>
+    <p>Thank you for reaching out. A member of our team will respond to your enquiry shortly.</p>
+    <button class="modal-close" onclick="closeModal('contact-modal')">Close</button>
+  </div>
+</div>
+
+
+<script>
+/* ── LIVE CLOCK ── */
+function updateClock(){
+  const now=new Date();
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const hh=String(now.getHours()).padStart(2,'0');
+  const mm=String(now.getMinutes()).padStart(2,'0');
+  const ss=String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('live-time').textContent=`${hh}:${mm}:${ss}`;
+  document.getElementById('live-date').textContent=`${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+}
+updateClock();setInterval(updateClock,1000);
+
+/* ── THEME SWITCHER ── */
+function applyTheme(theme){
+  document.documentElement.setAttribute('data-theme',theme);
+  localStorage.setItem('swiftexp-theme',theme);
+  const isLight=theme==='light';
+  document.getElementById('themeIcon').textContent=isLight?'☀️':'🌙';
+  document.getElementById('themeLabel').textContent=isLight?'Light':'Dark';
+  document.getElementById('opt-light').classList.toggle('active',isLight);
+  document.getElementById('opt-dark').classList.toggle('active',!isLight);
+  document.getElementById('check-light').textContent=isLight?'✓':'';
+  document.getElementById('check-dark').textContent=isLight?'':'✓';
+}
+function toggleThemeMenu(e){
+  e.stopPropagation();
+  document.getElementById('themeSwitcher').classList.toggle('open');
+}
+function setTheme(theme){
+  applyTheme(theme);
+  document.getElementById('themeSwitcher').classList.remove('open');
+}
+document.addEventListener('click',(e)=>{
+  const sw=document.getElementById('themeSwitcher');
+  if(sw&&!sw.contains(e.target))sw.classList.remove('open');
+});
+(function(){
+  const saved=localStorage.getItem('swiftexp-theme');
+  if(saved){applyTheme(saved);}
+  else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){applyTheme('dark');}
+  else{applyTheme('light');}
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',e=>{
+    if(!localStorage.getItem('swiftexp-theme'))applyTheme(e.matches?'dark':'light');
+  });
+})();
+
+/* ── NAVBAR SCROLL ── */
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40);
+});
+
+/* ── PAGE NAVIGATION ── */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='home')animateBars();
+  setTimeout(()=>{observeReveal();},100);
+}
+
+/* ── SCROLL REVEAL ── */
+function observeReveal(){
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>{
+    el.classList.remove('visible');
+    observer.observe(el);
+  });
+}
+observeReveal();
+
+/* ── STAT COUNTERS ── */
+function animateCounters(){
+  document.querySelectorAll('.counter').forEach(el=>{
+    const target=+el.dataset.target;
+    const duration=1800;
+    const start=performance.now();
+    function step(ts){
+      const progress=Math.min((ts-start)/duration,1);
+      const ease=1-Math.pow(1-progress,3);
+      const val=Math.round(ease*target);
+      el.textContent=val>=1000?val.toLocaleString():val;
+      if(progress<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+}
+const statsObserver=new IntersectionObserver((entries)=>{
+  if(entries[0].isIntersecting){animateCounters();statsObserver.disconnect();}
+},{threshold:0.3});
+const statsEl=document.querySelector('.stats-band');
+if(statsEl)statsObserver.observe(statsEl);
+
+/* ── PROGRESS BARS ── */
+function animateBars(){
+  document.querySelectorAll('.bar-fill').forEach(b=>{
+    b.style.width='0';
+    setTimeout(()=>{b.style.width=b.dataset.width+'%';},300);
+  });
+}
+const barsObserver=new IntersectionObserver((entries)=>{
+  if(entries[0].isIntersecting){animateBars();barsObserver.disconnect();}
+},{threshold:0.3});
+const barsEl=document.querySelector('.progress-section');
+if(barsEl)barsObserver.observe(barsEl);
+
+/* ════════════════════════════════════════════
+   TRACKING — reads from the same JSONBin used
+   by the admin backend.
+
+   The backend stores data as:
+     { shipments: { "SWEX-YYYY-NNNNN": { ...shipment } } }
+
+   The frontend reads shipments from data.record.shipments,
+   with a fallback to data.record for flat/legacy bins.
+════════════════════════════════════════════ */
+const JSONBIN_BIN_ID    = '6a3fd6fcda38895dfe078dc7';
+const JSONBIN_ACCESS_KEY = '$2a$10$dT6/Y/CiowmVfmTmWNqb/OnS1rpLVNb.3CitpOjcesOXHTM/MxbiC';
+const JSONBIN_URL       = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`;
+
+async function fetchShipments(){
+  const res = await fetch(JSONBIN_URL, {
+    headers: { 'X-Access-Key': JSONBIN_ACCESS_KEY }
+  });
+  if(!res.ok) throw new Error('JSONBin request failed: ' + res.status);
+  const data = await res.json();
+  /*
+   * Backend saves: { shipments: { "SWEX-...": { ...} } }
+   * Legacy/flat:   { "SWEX-...": { ...} }
+   * Support both.
+   */
+  return data.record?.shipments || data.record || {};
+}
+
+function fmtTrackDate(iso){
+  if(!iso) return '—';
+  return new Date(iso).toLocaleString(undefined,{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+function fmtDateOnly(iso){
+  if(!iso) return '—';
+  const d=new Date(iso+(iso.includes('T')?'':'T00:00:00'));
+  return d.toLocaleDateString(undefined,{month:'long',day:'numeric',year:'numeric'});
+}
+
+async function doTrack(){
+  const rawVal=document.getElementById('track-input').value.trim();
+  const val=rawVal.toUpperCase();
+  if(!val){alert('Please enter a tracking number.');return;}
+  const btn=document.querySelector('.track-box button');
+  btn.textContent='Searching…';btn.disabled=true;
+  const statusEl=document.getElementById('track-status');
+  const stepsEl=document.getElementById('track-steps');
+  const resultEl=document.getElementById('track-result');
+  resultEl.classList.remove('show');
+
+  try{
+    const shipments = await fetchShipments();
+    // Case-insensitive key match
+    const key = Object.keys(shipments).find(k => k.toUpperCase() === val);
+    const s = key ? shipments[key] : null;
+
+    if(!s){
+      statusEl.textContent = 'No shipment found for tracking ID: ' + val;
+      stepsEl.innerHTML = '<li style="color:rgba(255,255,255,.55);font-size:.83rem;padding:.7rem 0;border:none;">Please double-check your tracking number and try again. If you believe this is an error, contact us at info@swiftexpressdelivery.com</li>';
+      resultEl.classList.add('show');
+      btn.textContent='Track';btn.disabled=false;
+      return;
+    }
+
+    statusEl.textContent = 'Tracking: ' + s.id + '  ·  Status: ' + s.status;
+
+    const steps = [];
+    // Use senderName/origin from admin backend fields
+    const originLabel = s.origin || 'Origin';
+    steps.push({label:'Shipment Created — ' + originLabel, time:fmtTrackDate(s.created || s.dateShipped), done:true});
+
+    (s.history || []).forEach(h => {
+      steps.push({label: h.location + (h.status ? ' [' + h.status + ']' : ''), time:fmtTrackDate(h.time), done:true});
+    });
+
+    const delivered = (s.status === 'Delivered');
+    const destLabel = s.destination || 'Destination';
+    steps.push({
+      label: delivered ? 'Delivered — ' + destLabel : 'Expected Delivery — ' + destLabel,
+      time:  delivered ? 'Delivered ✓' : 'Expected: ' + fmtDateOnly(s.eta),
+      done:  delivered,
+      current: !delivered
+    });
+
+    stepsEl.innerHTML = steps.map((step, i) => `
+      <li>
+        <div class="step-indicator">
+          <span class="step-dot ${step.done ? 'done' : step.current ? 'current' : ''}"></span>
+          ${i < steps.length - 1 ? '<div class="step-line"></div>' : ''}
+        </div>
+        <div class="step-info">
+          <strong>${step.label}</strong>
+          <span class="step-loc">${step.time}</span>
+        </div>
+      </li>`).join('');
+
+    resultEl.classList.add('show');
+  } catch(err){
+    console.error(err);
+    statusEl.textContent = 'Unable to reach tracking service right now.';
+    stepsEl.innerHTML = '<li style="color:rgba(255,255,255,.55);font-size:.83rem;padding:.7rem 0;border:none;">Please try again shortly, or contact us at info@swiftexpressdelivery.com</li>';
+    resultEl.classList.add('show');
+  } finally {
+    btn.textContent='Track';btn.disabled=false;
+  }
+}
+
+/* ── FAQ ── */
+function toggleFaq(el){
+  const item=el.parentElement;
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+
+/* ── MODALS ── */
+function showModal(id){document.getElementById(id).classList.add('show');}
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+document.querySelectorAll('.modal-overlay').forEach(m=>{
+  m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show');});
+});
+</script>
+</body>
+</html>

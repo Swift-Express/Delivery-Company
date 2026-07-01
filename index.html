@@ -353,51 +353,6 @@ body{
 .why-check svg{width:9px;height:9px;stroke:#fff;stroke-width:2.5;}
 .why-item-text{font-size:.81rem;color:var(--text-primary);font-weight:500;line-height:1.4;}
 
-/* ─── TRACKING ─── */
-.track-section{background:#11161F;padding:4rem 8%;transition:background .3s;}
-[data-theme="dark"] .track-section{background:#05070A;}
-.track-inner{max-width:680px;margin:0 auto;text-align:center;}
-.track-inner .section-eyebrow{justify-content:center;}
-.track-inner .section-title{color:#fff;}
-.track-inner .section-body{color:rgba(255,255,255,.5);margin:1rem 0 2.2rem;}
-.track-box{display:flex;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);border-radius:2px;overflow:hidden;transition:border-color .2s;}
-.track-box:focus-within{border-color:var(--gold);}
-.track-box input{flex:1;background:transparent;border:none;outline:none;padding:1rem 1.4rem;font-family:var(--ff-utility);font-size:.86rem;color:#fff;letter-spacing:.04em;}
-.track-box input::placeholder{color:rgba(255,255,255,.3);}
-.track-box button{
-  background:var(--gold);color:#0A0E14;border:none;padding:1rem 1.8rem;
-  font-family:var(--ff-utility);font-size:.76rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
-  cursor:pointer;transition:background .2s;flex-shrink:0;
-}
-.track-box button:hover{background:var(--gold2);}
-.track-box button:disabled{opacity:.7;cursor:not-allowed;}
-.track-result{margin-top:1.8rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:1.6rem;display:none;text-align:left;}
-.track-result.show{display:block;}
-.track-status{font-family:var(--ff-utility);font-size:.76rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);margin-bottom:1.2rem;padding-bottom:.9rem;border-bottom:1px solid rgba(255,255,255,.08);}
-.track-steps{list-style:none;display:flex;flex-direction:column;gap:0;}
-.track-steps li{display:flex;gap:1rem;align-items:flex-start;padding:.85rem 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.81rem;color:rgba(255,255,255,.65);}
-.track-steps li:last-child{border:none;}
-.step-indicator{display:flex;flex-direction:column;align-items:center;flex-shrink:0;margin-top:2px;}
-.step-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;}
-.step-dot.done{background:var(--gold);}
-.step-dot.current{background:#4ade80;box-shadow:0 0 0 3px rgba(74,222,128,.2);}
-.step-line{width:1px;height:100%;background:rgba(255,255,255,.07);flex:1;min-height:20px;}
-.step-info strong{display:block;color:rgba(255,255,255,.85);font-size:.81rem;margin-bottom:.2rem;}
-.step-loc{font-size:.75rem;color:rgba(255,255,255,.4);}
-.track-summary{display:none;grid-template-columns:1fr 1fr;gap:0;margin-bottom:1.2rem;padding-bottom:1.1rem;border-bottom:1px solid rgba(255,255,255,.08);}
-.track-summary.show{display:grid;}
-@media(max-width:560px){.track-summary{grid-template-columns:1fr;}}
-.track-summary .ts-item{padding:.5rem 0;}
-.track-summary .ts-k{font-family:var(--ff-utility);font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);}
-.track-summary .ts-v{font-size:.85rem;color:rgba(255,255,255,.85);font-weight:600;margin-top:.2rem;}
-.track-summary .ts-route{grid-column:1/-1;display:flex;align-items:center;gap:.8rem;padding:.3rem 0 .9rem;}
-.track-summary .ts-route .ts-pt{flex:1;}
-.track-summary .ts-route .arrow{color:var(--gold2);font-size:1.1rem;}
-.status-chip{display:inline-block;padding:.32rem .85rem;border-radius:2px;font-family:var(--ff-utility);
-  font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-left:.7rem;
-  background:rgba(63,169,224,.15);color:var(--gold2);}
-.status-chip.delivered{background:rgba(74,222,128,.15);color:#4ade80;}
-
 /* ─── PROVIDE ─── */
 .provide-section{padding:4rem 8%;background:var(--section-alt2);}
 .provide-header{text-align:center;margin-bottom:2.5rem;}
@@ -739,7 +694,7 @@ body{
 
     <ul class="nav-links">
       <li><a href="#" onclick="showPage('home');return false;">Home</a></li>
-      <li><a href="#" onclick="showPage('track');return false;">Track</a></li>
+      <li><a href="https://swift-express.github.io/Track-Delivery-/" target="_blank" rel="noopener" >Track</a></li>
       <li><a href="#" onclick="showPage('about');return false;">About</a></li>
       <li><a href="#" onclick="showPage('services');return false;">Services</a></li>
       <li><a href="#" onclick="showPage('contact');return false;">Contact</a></li>
@@ -757,7 +712,7 @@ body{
       <div class="slide-eyebrow">Global Logistics Leader</div>
       <h1>Elevating the World of Logistics.</h1>
       <p>The world's largest retailers and brands rely on Swift Express Delivery Company to move fast, at scale, with absolute precision.</p>
-      <a href="#" class="btn-primary" onclick="showPage('track');return false;">
+      <a href="https://swift-express.github.io/Track-Delivery-/" target="_blank" rel="noopener" class="btn-primary" >
         Track Shipment
         <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -1007,27 +962,6 @@ body{
 </div><!-- /home -->
 
 
-<!-- ══════════════ TRACK PAGE ══════════════ -->
-<div id="page-track" class="page">
-  <div class="track-section" style="min-height:65vh;display:flex;flex-direction:column;justify-content:center;">
-    <div class="track-inner">
-      <div class="section-eyebrow">Real-Time Visibility</div>
-      <h2 class="section-title">Track Your Shipment</h2>
-      <p class="section-body">Enter your tracking reference to get live status updates on your consignment.</p>
-      <div class="track-box">
-        <input type="text" id="track-input" placeholder="e.g. SWEX-2025-78432" onkeydown="if(event.key==='Enter')doTrack()"/>
-        <button onclick="doTrack()">Track</button>
-      </div>
-      <div class="track-result" id="track-result">
-        <div class="track-status" id="track-status"></div>
-        <div class="track-summary" id="track-summary"></div>
-        <ul class="track-steps" id="track-steps"></ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 <!-- ══════════════ ABOUT PAGE ══════════════ -->
 <div id="page-about" class="page">
   <div class="about-page">
@@ -1186,7 +1120,7 @@ body{
       <ul>
         <li><a href="#" onclick="showPage('home');return false;">Home</a></li>
         <li><a href="#" onclick="showPage('services');return false;">Services</a></li>
-        <li><a href="#" onclick="showPage('track');return false;">Track Shipment</a></li>
+        <li><a href="https://swift-express.github.io/Track-Delivery-/" target="_blank" rel="noopener" >Track Shipment</a></li>
         <li><a href="#" onclick="showPage('appointment');return false;">Book Appointment</a></li>
       </ul>
     </div>
@@ -1338,154 +1272,6 @@ const barsObserver=new IntersectionObserver((entries)=>{
 },{threshold:0.3});
 const barsEl=document.querySelector('.progress-section');
 if(barsEl)barsObserver.observe(barsEl);
-
-/* ════════════════════════════════════════════
-   TRACKING — reads from the same JSONBin used
-   by the admin backend.
-
-   The backend stores data as:
-     { shipments: { "SWEX-YYYY-NNNNN": { ...shipment } } }
-
-   The frontend reads shipments from data.record.shipments,
-   with a fallback to data.record for flat/legacy bins.
-════════════════════════════════════════════ */
-const JSONBIN_BIN_ID    = '6a42036ff5f4af5e293fbe91';
-const JSONBIN_ACCESS_KEY = '$2a$10$VhKQ637EoLR/qmEAR2Z.XuaWAGubH7O4BSstH1qXGbGCnkYLMkkz';
-const JSONBIN_URL       = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`;
-
-// The 9-stage journey used across the admin dashboard and tracking page
-const TRACK_STAGES = ['Shipment Created','Picked Up','Warehouse','Airport','Customs',
-  'Destination Country','Local Distribution','Out for Delivery','Delivered'];
-
-async function fetchShipments(){
-  const res = await fetch(JSONBIN_URL, {
-    headers: { 'X-Access-Key': JSONBIN_ACCESS_KEY }
-  });
-  if(!res.ok) throw new Error('JSONBin request failed: ' + res.status);
-  const data = await res.json();
-  /*
-   * Backend saves: { shipments: { "SWEX-...": { ...} } }
-   * Legacy/flat:   { "SWEX-...": { ...} }
-   * Support both.
-   */
-  return data.record?.shipments || data.record || {};
-}
-
-function fmtTrackDate(iso){
-  if(!iso) return '—';
-  return new Date(iso).toLocaleString(undefined,{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
-}
-function fmtDateOnly(iso){
-  if(!iso) return '—';
-  const d=new Date(iso+(iso.includes('T')?'':'T00:00:00'));
-  return d.toLocaleDateString(undefined,{month:'long',day:'numeric',year:'numeric'});
-}
-
-function escHtml(str){
-  const d=document.createElement('div');
-  d.textContent=str||'';
-  return d.innerHTML;
-}
-
-async function doTrack(){
-  const rawVal=document.getElementById('track-input').value.trim();
-  const val=rawVal.toUpperCase();
-  if(!val){alert('Please enter a tracking number.');return;}
-  const btn=document.querySelector('.track-box button');
-  btn.textContent='Searching…';btn.disabled=true;
-  const statusEl=document.getElementById('track-status');
-  const summaryEl=document.getElementById('track-summary');
-  const stepsEl=document.getElementById('track-steps');
-  const resultEl=document.getElementById('track-result');
-  resultEl.classList.remove('show');
-  summaryEl.classList.remove('show');
-
-  try{
-    const shipments = await fetchShipments();
-    // Case-insensitive key match
-    const key = Object.keys(shipments).find(k => k.toUpperCase() === val);
-    const s = key ? shipments[key] : null;
-
-    if(!s){
-      statusEl.innerHTML = 'No shipment found for tracking ID: ' + escHtml(val);
-      summaryEl.innerHTML = '';
-      stepsEl.innerHTML = '<li style="color:rgba(255,255,255,.55);font-size:.83rem;padding:.7rem 0;border:none;">Please double-check your tracking number and try again. If you believe this is an error, contact us at info.guaranteeshipping@gmail.com</li>';
-      resultEl.classList.add('show');
-      btn.textContent='Track';btn.disabled=false;
-      return;
-    }
-
-    const delivered = (s.status === 'Delivered');
-    statusEl.innerHTML = 'Tracking: ' + escHtml(s.id) +
-      '<span class="status-chip ' + (delivered?'delivered':'') + '">' + escHtml(s.status) + '</span>';
-
-    summaryEl.innerHTML = `
-      <div class="ts-route">
-        <div class="ts-pt"><div class="ts-k">From</div><div class="ts-v">${escHtml(s.origin)}</div></div>
-        <div class="arrow">→</div>
-        <div class="ts-pt" style="text-align:right;"><div class="ts-k">To</div><div class="ts-v">${escHtml(s.destination)}</div></div>
-      </div>
-      <div class="ts-item"><div class="ts-k">Receiver</div><div class="ts-v">${escHtml(s.receiverName)}</div></div>
-      <div class="ts-item"><div class="ts-k">Goods</div><div class="ts-v">${escHtml(s.goods)}</div></div>
-      <div class="ts-item"><div class="ts-k">Service</div><div class="ts-v">${escHtml(s.service||'—')}</div></div>
-      <div class="ts-item"><div class="ts-k">Weight</div><div class="ts-v">${escHtml(s.weight||'—')}</div></div>
-      <div class="ts-item"><div class="ts-k">Date Shipped</div><div class="ts-v">${fmtDateOnly(s.dateShipped)}</div></div>
-      <div class="ts-item"><div class="ts-k">Expected Delivery</div><div class="ts-v">${fmtDateOnly(s.eta)}</div></div>
-    `;
-    summaryEl.classList.add('show');
-
-    // Build the full 9-stage journey (Shipment Created → Delivered),
-    // matching the admin dashboard timeline exactly.
-    const stageTimes = {};
-    if (s.history && s.history.length){
-      s.history.forEach(h=>{ if(TRACK_STAGES.includes(h.status)) stageTimes[h.status]=h.time; });
-    }
-    if(!stageTimes['Shipment Created']) stageTimes['Shipment Created'] = s.created || s.dateShipped;
-    const curIdx = TRACK_STAGES.indexOf(s.status);
-
-    const steps = TRACK_STAGES.map((stage,i)=>{
-      const done = curIdx>=0 && i<=curIdx;
-      const current = i===curIdx && stage!=='Delivered';
-      const time = stageTimes[stage] ? fmtTrackDate(stageTimes[stage]) : (done ? '—' : 'Pending');
-      return { label: stage, time, done, current };
-    });
-
-    stepsEl.innerHTML = steps.map((step, i) => `
-      <li>
-        <div class="step-indicator">
-          <span class="step-dot ${step.done ? 'done' : step.current ? 'current' : ''}"></span>
-          ${i < steps.length - 1 ? '<div class="step-line"></div>' : ''}
-        </div>
-        <div class="step-info">
-          <strong>${step.label}</strong>
-          <span class="step-loc">${step.time}</span>
-        </div>
-      </li>`).join('');
-
-    resultEl.classList.add('show');
-  } catch(err){
-    console.error(err);
-    statusEl.textContent = 'Unable to reach tracking service right now.';
-    summaryEl.innerHTML = '';
-    stepsEl.innerHTML = '<li style="color:rgba(255,255,255,.55);font-size:.83rem;padding:.7rem 0;border:none;">Please try again shortly, or contact us at info.guaranteeshipping@gmail.com</li>';
-    resultEl.classList.add('show');
-  } finally {
-    btn.textContent='Track';btn.disabled=false;
-  }
-}
-
-// Auto-track if the page is loaded with ?id=SWEX-... or #track?id=SWEX-...
-(function(){
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get('id') || params.get('tracking');
-  if(id){
-    document.addEventListener('DOMContentLoaded', ()=>{
-      showPage('track');
-      document.getElementById('track-input').value = id;
-      doTrack();
-    });
-  }
-})();
 
 /* ── FAQ ── */
 function toggleFaq(el){

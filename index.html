@@ -117,63 +117,76 @@ body{
 
 /* ─── NAVBAR ─── */
 .navbar{
-  background:var(--navbar-bg);
+  background:linear-gradient(180deg,#0B2E55 0%,#0A0E14 100%);
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
   padding:.7rem 3rem;
   display:flex;align-items:center;justify-content:space-between;
   position:sticky;top:0;z-index:1000;
-  border-bottom:1px solid var(--navbar-border);
-  transition:box-shadow .3s,background .3s,border-color .3s;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  transition:box-shadow .3s;
 }
-.navbar.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.18);}
+.navbar.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.35);}
 .logo-wrap{display:flex;align-items:center;gap:.8rem;text-decoration:none;}
 .logo-svg-wrap{width:42px;height:42px;flex-shrink:0;overflow:visible;}
 .logo-text-block{display:flex;flex-direction:column;line-height:1;}
 .logo-brand{
   font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.02em;
-  color:var(--forest);text-transform:uppercase;line-height:1.15;white-space:nowrap;
+  color:#fff;text-transform:uppercase;line-height:1.15;white-space:nowrap;
 }
-[data-theme="dark"] .logo-brand{color:#4FB6E8;}
-.logo-brand span.logo-accent{color:var(--gold);}
+.logo-brand span.logo-accent{color:var(--gold2);}
 .logo-brand span.logo-delivery{font-weight:700;}
 .logo-sub{
   font-family:var(--ff-body);font-size:.58rem;font-weight:600;letter-spacing:.24em;
-  color:var(--text-secondary);text-transform:uppercase;margin-top:.28rem;
+  color:rgba(255,255,255,.5);text-transform:uppercase;margin-top:.28rem;
 }
-.nav-links{display:flex;align-items:center;gap:2.2rem;list-style:none;}
+.nav-right{display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap;}
+.nav-links{display:flex;align-items:center;gap:2.2rem;list-style:none;flex-wrap:nowrap;}
 .nav-links a{
   text-decoration:none;font-family:var(--ff-utility);font-size:.78rem;font-weight:500;
-  letter-spacing:.08em;color:var(--text-secondary);text-transform:uppercase;
+  letter-spacing:.08em;color:rgba(255,255,255,.62);text-transform:uppercase;
   transition:color .2s;position:relative;
 }
 .nav-links a::after{
   content:'';position:absolute;left:0;bottom:-4px;
-  width:0;height:1.5px;background:var(--gold);transition:width .25s ease;
+  width:0;height:1.5px;background:var(--gold2);transition:width .25s ease;
 }
-.nav-links a:hover{color:var(--text-primary);}
+.nav-links a:hover{color:#fff;}
 .nav-links a:hover::after{width:100%;}
 .nav-cta{
-  background:#0B2E55 !important;color:#fff !important;padding:.5rem 1.25rem;
-  border-radius:2px;letter-spacing:.1em !important;transition:background .2s !important;
+  background:rgba(255,255,255,.08) !important;
+  color:#fff !important;padding:.55rem 1.35rem;
+  border-radius:6px;letter-spacing:.1em !important;
+  border:1px solid rgba(255,255,255,.22) !important;
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  box-shadow:0 8px 28px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.2);
+  text-shadow:0 1px 2px rgba(0,0,0,.3);
+  transition:background .25s,border-color .25s,box-shadow .25s !important;
 }
-[data-theme="dark"] .nav-cta{background:#16467F !important;}
 .nav-cta::after{display:none !important;}
-.nav-cta:hover{background:#0A0E14 !important;}
+.nav-cta:hover{
+  background:rgba(255,255,255,.16) !important;
+  border-color:var(--gold) !important;
+  box-shadow:0 8px 28px rgba(63,169,224,.35),inset 0 1px 0 rgba(255,255,255,.25);
+}
 
 /* ─── THEME SWITCHER ─── */
 .theme-switcher{position:relative;}
 .theme-btn{
   display:flex;align-items:center;gap:.45rem;
-  background:var(--section-alt2);
-  border:1px solid var(--border-color);
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.2);
+  backdrop-filter:blur(14px) saturate(160%);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
   padding:.45rem .8rem;cursor:pointer;
   font-family:var(--ff-utility);font-size:.74rem;font-weight:600;letter-spacing:.04em;
-  color:var(--text-primary);border-radius:2px;
+  color:#fff;border-radius:6px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.15);
   transition:border-color .2s,background .2s,transform .15s,color .2s;
   white-space:nowrap;
 }
-.theme-btn:hover{border-color:var(--gold);background:var(--ash);}
+.theme-btn:hover{border-color:var(--gold);background:rgba(255,255,255,.16);}
 .theme-btn:active{transform:scale(.96);}
 .theme-btn-icon{font-size:1rem;line-height:1;}
 .theme-chevron{width:9px;height:9px;transition:transform .3s cubic-bezier(.4,0,.2,1);flex-shrink:0;}
@@ -200,6 +213,69 @@ body{
 .theme-opt-name{font-family:var(--ff-utility);font-size:.8rem;font-weight:700;color:var(--text-primary);}
 .theme-opt-desc{font-size:.72rem;color:var(--text-secondary);margin-top:.1rem;}
 .theme-check{margin-left:auto;font-size:.85rem;color:var(--gold);font-weight:700;flex-shrink:0;min-width:14px;text-align:center;}
+
+/* ─── SE BADGE LOGO ─── */
+.se-badge{
+  width:42px;height:42px;flex-shrink:0;border-radius:12px;
+  background:linear-gradient(135deg,#3FA9E0,#7CC9EE);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:1.05rem;
+  letter-spacing:.01em;color:#fff;
+  box-shadow:0 4px 14px rgba(63,169,224,.5),inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+/* ─── LANGUAGE SWITCHER ─── */
+.lang-switcher{position:relative;}
+.lang-btn{
+  display:flex;align-items:center;gap:.45rem;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.24);
+  backdrop-filter:blur(16px) saturate(180%);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);
+  padding:.45rem .8rem;cursor:pointer;
+  font-family:var(--ff-utility);font-size:.74rem;font-weight:600;letter-spacing:.04em;
+  color:#fff;border-radius:6px;
+  box-shadow:0 2px 12px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.25);
+  transition:border-color .2s,background .2s,transform .15s,color .2s;
+  white-space:nowrap;
+}
+.lang-btn:hover{border-color:var(--gold2);background:rgba(255,255,255,.2);}
+.lang-btn:active{transform:scale(.96);}
+.lang-btn-icon{font-size:1rem;line-height:1;}
+.lang-chevron{width:9px;height:9px;transition:transform .3s cubic-bezier(.4,0,.2,1);flex-shrink:0;}
+.lang-switcher.open .lang-chevron{transform:rotate(180deg);}
+.lang-dropdown{
+  position:absolute;top:calc(100% + 10px);left:0;right:auto;width:210px;
+  background:var(--card-bg);border:1px solid var(--border-color);
+  border-top:3px solid var(--gold);box-shadow:0 24px 56px rgba(0,0,0,.22);
+  padding:.5rem;display:flex;flex-direction:column;gap:.15rem;
+  max-height:340px;overflow-y:auto;
+  opacity:0;visibility:hidden;transform:translateY(-10px) scale(.97);
+  transform-origin:top left;
+  transition:opacity .22s ease,transform .22s cubic-bezier(.34,1.56,.64,1),visibility .22s;
+  z-index:1500;
+}
+.lang-switcher.open .lang-dropdown{opacity:1;visibility:visible;transform:translateY(0) scale(1);}
+@media(min-width:900px){
+  .lang-dropdown{left:auto;right:0;transform-origin:top right;}
+  .lang-switcher.open .lang-dropdown{transform:translateY(0) scale(1);}
+}
+.lang-option{display:flex;align-items:center;gap:.7rem;padding:.6rem .8rem;border-radius:2px;cursor:pointer;transition:background .18s;}
+.lang-option:hover{background:var(--ash);}
+.lang-option.active{background:rgba(63,169,224,.1);}
+.lang-opt-flag{font-size:1.1rem;flex-shrink:0;}
+.lang-opt-name{font-family:var(--ff-utility);font-size:.8rem;font-weight:700;color:var(--text-primary);}
+.lang-opt-native{font-size:.7rem;color:var(--text-secondary);margin-top:.05rem;}
+.lang-check{margin-left:auto;font-size:.85rem;color:var(--gold);font-weight:700;flex-shrink:0;min-width:14px;text-align:center;}
+
+/* Hide Google Translate default UI bits so the site keeps its own design */
+#google_translate_element{position:absolute;top:-9999px;left:-9999px;height:0;width:0;overflow:hidden;}
+.goog-te-banner-frame{display:none !important;}
+.goog-tooltip,.goog-tooltip:hover{display:none !important;}
+.goog-text-highlight{background:none !important;box-shadow:none !important;}
+body{top:0 !important;}
+body.goog-te-hl{top:0 !important;}
+.skiptranslate iframe{display:none !important;}
 
 /* ─── HERO ─── */
 .hero{
@@ -564,7 +640,18 @@ body{
   .services-strip .header{flex-direction:column;align-items:flex-start;gap:1rem;}
 }
 @media(max-width:900px){
-  .navbar{padding:.7rem 1.5rem;}
+  .navbar{padding:.7rem 1.5rem;flex-wrap:wrap;row-gap:.9rem;}
+  .nav-right{width:100%;flex-wrap:wrap;row-gap:.9rem;}
+  .nav-links{
+    order:3;width:100%;flex-wrap:nowrap;justify-content:flex-start;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    gap:1.6rem;padding-bottom:2px;scrollbar-width:none;
+  }
+  .nav-links::-webkit-scrollbar{display:none;}
+  .nav-links a{white-space:nowrap;}
+  .theme-switcher{order:1;}
+  .lang-switcher{order:2;}
+  .nav-cta{order:4;width:100%;justify-content:center;text-align:center;}
   .hero{height:380px;}
   .slide-content h1{font-size:2.1rem;}
   .about-split{grid-template-columns:1fr;}
@@ -580,8 +667,8 @@ body{
 }
 @media(max-width:640px){
   html{font-size:14px;}
-  .navbar{flex-wrap:wrap;gap:.6rem;padding:.6rem 1rem;}
-  .nav-links{gap:1.1rem;flex-wrap:wrap;}
+  .navbar{gap:.6rem;padding:.6rem 1rem;}
+  .nav-links{gap:1.1rem;}
   .hero{height:340px;padding:0 6% 2.5rem;}
   .slide-content h1{font-size:1.7rem;}
   .cards-grid,.provide-grid,.testi-grid,.team-grid{grid-template-columns:1fr;}
@@ -595,6 +682,7 @@ body{
   .ticker-scroll{display:none;}
   .ticker-clock{gap:.8rem;}
   .theme-dropdown{width:210px;left:0;right:auto;}
+  .lang-dropdown{width:190px;left:0;right:auto;}
 }
 </style>
 </head>
@@ -631,41 +719,14 @@ body{
 <!-- ══ NAVBAR ══ -->
 <nav class="navbar" id="navbar">
   <a class="logo-wrap" href="#" onclick="showPage('home');return false;">
-    <svg class="logo-svg-wrap" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;width:48px;height:48px;">
-      <defs>
-        <clipPath id="globe-clip"><circle cx="24" cy="24" r="17"/></clipPath>
-      </defs>
-      <circle cx="24" cy="24" r="17" fill="#0B2E55" stroke="#16467F" stroke-width="1"/>
-      <g style="animation:globe-rotate 7s linear infinite;transform-origin:24px 24px;" clip-path="url(#globe-clip)">
-        <ellipse cx="24" cy="24" rx="17" ry="5.5" fill="none" stroke="#16467F" stroke-width="0.7" opacity="0.8"/>
-        <ellipse cx="24" cy="24" rx="17" ry="11" fill="none" stroke="#16467F" stroke-width="0.5" opacity="0.5"/>
-        <ellipse cx="24" cy="24" rx="5" ry="17" fill="none" stroke="#16467F" stroke-width="0.6" opacity="0.7"/>
-        <ellipse cx="24" cy="24" rx="11" ry="17" fill="none" stroke="#16467F" stroke-width="0.5" opacity="0.5"/>
-        <ellipse cx="19" cy="17" rx="5.5" ry="3.8" fill="#3FA9E0" opacity="0.9"/>
-        <ellipse cx="30" cy="19" rx="3.8" ry="5" fill="#3FA9E0" opacity="0.8"/>
-        <ellipse cx="17" cy="28" rx="3.2" ry="2.7" fill="#3FA9E0" opacity="0.75"/>
-        <ellipse cx="29" cy="30" rx="4.2" ry="3" fill="#3FA9E0" opacity="0.85"/>
-        <ellipse cx="22" cy="33" rx="2.5" ry="2.2" fill="#3FA9E0" opacity="0.65"/>
-      </g>
-      <line x1="7" y1="24" x2="41" y2="24" stroke="#16467F" stroke-width="0.5" opacity="0.4"/>
-      <circle cx="24" cy="24" r="17" fill="none" stroke="#4FB6E8" stroke-width="1.2" opacity="0.55"/>
-      <g style="animation:orbit-rotate 3.5s linear infinite;transform-origin:24px 24px;">
-        <ellipse cx="24" cy="24" rx="23.5" ry="8.5" fill="none" stroke="#3FA9E0" stroke-width="1.3" stroke-dasharray="3 2" opacity="0.95"/>
-        <circle cx="47.5" cy="24" r="2.8" fill="#3FA9E0"/>
-      </g>
-      <g style="animation:orbit-rotate2 5s linear infinite;transform-origin:24px 24px;">
-        <ellipse cx="24" cy="24" rx="8.5" ry="23.5" fill="none" stroke="#7CC9EE" stroke-width="0.9" stroke-dasharray="2.5 3" opacity="0.55"/>
-        <circle cx="24" cy="0.5" r="2" fill="#7CC9EE" opacity="0.85"/>
-      </g>
-      <ellipse cx="18" cy="17" rx="5.5" ry="3.5" fill="white" opacity="0.06"/>
-    </svg>
+    <div class="se-badge">SE</div>
     <div class="logo-text-block">
       <span class="logo-brand">Swift-<span class="logo-accent">Express</span> <span class="logo-delivery">-Delivery-Company</span></span>
       <span class="logo-sub">✈️-Always at your Service-🚚</span>
     </div>
   </a>
 
-  <div style="display:flex;align-items:center;gap:1.4rem;">
+  <div class="nav-right">
     <div class="theme-switcher" id="themeSwitcher">
       <button class="theme-btn" onclick="toggleThemeMenu(event)" type="button" aria-label="Switch theme">
         <span class="theme-btn-icon" id="themeIcon">☀️</span>
@@ -692,14 +753,60 @@ body{
       </div>
     </div>
 
+    <div class="lang-switcher" id="langSwitcher">
+      <button class="lang-btn notranslate" onclick="toggleLangMenu(event)" type="button" aria-label="Translate page">
+        <span class="lang-btn-icon">🌐</span>
+        <span id="langLabel">EN</span>
+        <svg class="lang-chevron" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="lang-dropdown notranslate" id="langDropdown">
+        <div class="lang-option active" data-lang="en" onclick="setLanguage('en')">
+          <span class="lang-opt-flag">🇬🇧</span>
+          <div><div class="lang-opt-name">English</div></div>
+          <span class="lang-check">✓</span>
+        </div>
+        <div class="lang-option" data-lang="es" onclick="setLanguage('es')">
+          <span class="lang-opt-flag">🇪🇸</span>
+          <div><div class="lang-opt-name">Spanish</div><div class="lang-opt-native">Español</div></div>
+          <span class="lang-check"></span>
+        </div>
+        <div class="lang-option" data-lang="ja" onclick="setLanguage('ja')">
+          <span class="lang-opt-flag">🇯🇵</span>
+          <div><div class="lang-opt-name">Japanese</div><div class="lang-opt-native">日本語</div></div>
+          <span class="lang-check"></span>
+        </div>
+        <div class="lang-option" data-lang="ko" onclick="setLanguage('ko')">
+          <span class="lang-opt-flag">🇰🇷</span>
+          <div><div class="lang-opt-name">Korean</div><div class="lang-opt-native">한국어</div></div>
+          <span class="lang-check"></span>
+        </div>
+        <div class="lang-option" data-lang="zh-TW" onclick="setLanguage('zh-TW')">
+          <span class="lang-opt-flag">🇹🇼</span>
+          <div><div class="lang-opt-name">Taiwan</div><div class="lang-opt-native">繁體中文</div></div>
+          <span class="lang-check"></span>
+        </div>
+        <div class="lang-option" data-lang="zh-CN" onclick="setLanguage('zh-CN')">
+          <span class="lang-opt-flag">🇨🇳</span>
+          <div><div class="lang-opt-name">China</div><div class="lang-opt-native">简体中文</div></div>
+          <span class="lang-check"></span>
+        </div>
+        <div class="lang-option" data-lang="km" onclick="setLanguage('km')">
+          <span class="lang-opt-flag">🇰🇭</span>
+          <div><div class="lang-opt-name">Cambodia</div><div class="lang-opt-native">ខ្មែរ</div></div>
+          <span class="lang-check"></span>
+        </div>
+      </div>
+    </div>
+
     <ul class="nav-links">
       <li><a href="#" onclick="showPage('home');return false;">Home</a></li>
       <li><a href="https://swift-express.github.io/Track-Delivery-/" target="_blank" rel="noopener" >Track</a></li>
       <li><a href="#" onclick="showPage('about');return false;">About</a></li>
       <li><a href="#" onclick="showPage('services');return false;">Services</a></li>
       <li><a href="#" onclick="showPage('contact');return false;">Contact</a></li>
-      <li><a href="#" onclick="showPage('appointment');return false;" class="nav-cta">Book Appointment</a></li>
     </ul>
+
+    <a href="#" onclick="showPage('appointment');return false;" class="nav-cta">Book Appointment</a>
   </div>
 </nav>
 
@@ -1163,6 +1270,8 @@ body{
   </div>
 </div>
 
+<!-- Google Translate mount point (hidden, powers the language switcher) -->
+<div id="google_translate_element"></div>
 
 <script>
 /* ── LIVE CLOCK ── */
@@ -1193,6 +1302,7 @@ function applyTheme(theme){
 function toggleThemeMenu(e){
   e.stopPropagation();
   document.getElementById('themeSwitcher').classList.toggle('open');
+  document.getElementById('langSwitcher').classList.remove('open');
 }
 function setTheme(theme){
   applyTheme(theme);
@@ -1201,6 +1311,8 @@ function setTheme(theme){
 document.addEventListener('click',(e)=>{
   const sw=document.getElementById('themeSwitcher');
   if(sw&&!sw.contains(e.target))sw.classList.remove('open');
+  const lw=document.getElementById('langSwitcher');
+  if(lw&&!lw.contains(e.target))lw.classList.remove('open');
 });
 (function(){
   const saved=localStorage.getItem('swiftexp-theme');
@@ -1210,6 +1322,93 @@ document.addEventListener('click',(e)=>{
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',e=>{
     if(!localStorage.getItem('swiftexp-theme'))applyTheme(e.matches?'dark':'light');
   });
+})();
+
+/* ── LANGUAGE / TRANSLATE SWITCHER ── */
+const LANG_NAMES={en:'EN',es:'ES',ja:'JA',ko:'KO','zh-TW':'TW','zh-CN':'CN',km:'KH'};
+
+function setCookie(name,value,days){
+  const d=new Date();
+  d.setTime(d.getTime()+days*24*60*60*1000);
+  document.cookie=name+'='+value+';expires='+d.toUTCString()+';path=/;SameSite=Lax';
+}
+function getCookie(name){
+  const match=document.cookie.match(new RegExp('(^| )'+name+'=([^;]+)'));
+  return match?decodeURIComponent(match[2]):null;
+}
+function deleteCookie(name){
+  document.cookie=name+'=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+}
+
+function toggleLangMenu(e){
+  e.stopPropagation();
+  document.getElementById('langSwitcher').classList.toggle('open');
+  document.getElementById('themeSwitcher').classList.remove('open');
+}
+
+function updateLangUI(lang){
+  document.getElementById('langLabel').textContent=LANG_NAMES[lang]||'EN';
+  document.querySelectorAll('.lang-option').forEach(opt=>{
+    const isActive=opt.getAttribute('data-lang')===lang;
+    opt.classList.toggle('active',isActive);
+    opt.querySelector('.lang-check').textContent=isActive?'✓':'';
+  });
+}
+
+function doGoogleTranslate(lang){
+  // Drive the hidden Google Translate select element to trigger translation
+  let tries=0;
+  const interval=setInterval(()=>{
+    const select=document.querySelector('#google_translate_element select.goog-te-combo');
+    tries++;
+    if(select){
+      select.value=lang;
+      select.dispatchEvent(new Event('change'));
+      clearInterval(interval);
+    } else if(tries>40){
+      clearInterval(interval);
+    }
+  },250);
+}
+
+function setLanguage(lang){
+  // Remember the choice for 1 year via cookie
+  setCookie('swiftexp-lang',lang,365);
+
+  if(lang==='en'){
+    // Reset to original English: clear Google's translate cookie and reload
+    deleteCookie('googtrans');
+    document.cookie='googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain='+location.hostname;
+    updateLangUI('en');
+    document.getElementById('langSwitcher').classList.remove('open');
+    location.reload();
+    return;
+  }
+
+  setCookie('googtrans','/en/'+lang,365);
+  updateLangUI(lang);
+  document.getElementById('langSwitcher').classList.remove('open');
+  doGoogleTranslate(lang);
+}
+
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement({
+    pageLanguage:'en',
+    includedLanguages:'en,es,ja,ko,zh-TW,zh-CN,km',
+    autoDisplay:false
+  },'google_translate_element');
+
+  // On first load, re-apply a remembered language choice (cookie persists across visits)
+  const savedLang=getCookie('swiftexp-lang');
+  if(savedLang&&savedLang!=='en'){
+    updateLangUI(savedLang);
+    doGoogleTranslate(savedLang);
+  }
+}
+(function(){
+  // Reflect a remembered choice in the button immediately (before Google's script loads)
+  const savedLang=getCookie('swiftexp-lang');
+  if(savedLang)updateLangUI(savedLang);
 })();
 
 /* ── NAVBAR SCROLL ── */
@@ -1288,5 +1487,6 @@ document.querySelectorAll('.modal-overlay').forEach(m=>{
   m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show');});
 });
 </script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
 </body>
 </html>

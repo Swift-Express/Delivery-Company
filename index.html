@@ -384,6 +384,19 @@ body{
 .step-line{width:1px;height:100%;background:rgba(255,255,255,.07);flex:1;min-height:20px;}
 .step-info strong{display:block;color:rgba(255,255,255,.85);font-size:.81rem;margin-bottom:.2rem;}
 .step-loc{font-size:.75rem;color:rgba(255,255,255,.4);}
+.track-summary{display:none;grid-template-columns:1fr 1fr;gap:0;margin-bottom:1.2rem;padding-bottom:1.1rem;border-bottom:1px solid rgba(255,255,255,.08);}
+.track-summary.show{display:grid;}
+@media(max-width:560px){.track-summary{grid-template-columns:1fr;}}
+.track-summary .ts-item{padding:.5rem 0;}
+.track-summary .ts-k{font-family:var(--ff-utility);font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);}
+.track-summary .ts-v{font-size:.85rem;color:rgba(255,255,255,.85);font-weight:600;margin-top:.2rem;}
+.track-summary .ts-route{grid-column:1/-1;display:flex;align-items:center;gap:.8rem;padding:.3rem 0 .9rem;}
+.track-summary .ts-route .ts-pt{flex:1;}
+.track-summary .ts-route .arrow{color:var(--gold2);font-size:1.1rem;}
+.status-chip{display:inline-block;padding:.32rem .85rem;border-radius:2px;font-family:var(--ff-utility);
+  font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-left:.7rem;
+  background:rgba(63,169,224,.15);color:var(--gold2);}
+.status-chip.delivered{background:rgba(74,222,128,.15);color:#4ade80;}
 
 /* ─── PROVIDE ─── */
 .provide-section{padding:4rem 8%;background:var(--section-alt2);}
@@ -1007,6 +1020,7 @@ body{
       </div>
       <div class="track-result" id="track-result">
         <div class="track-status" id="track-status"></div>
+        <div class="track-summary" id="track-summary"></div>
         <ul class="track-steps" id="track-steps"></ul>
       </div>
     </div>
@@ -1335,9 +1349,13 @@ if(barsEl)barsObserver.observe(barsEl);
    The frontend reads shipments from data.record.shipments,
    with a fallback to data.record for flat/legacy bins.
 ════════════════════════════════════════════ */
-const JSONBIN_BIN_ID    = '6a3fd6fcda38895dfe078dc7';
-const JSONBIN_ACCESS_KEY = '$2a$10$dT6/Y/CiowmVfmTmWNqb/OnS1rpLVNb.3CitpOjcesOXHTM/MxbiC';
+const JSONBIN_BIN_ID    = '6a42036ff5f4af5e293fbe91';
+const JSONBIN_ACCESS_KEY = '$2a$10$VhKQ637EoLR/qmEAR2Z.XuaWAGubH7O4BSstH1qXGbGCnkYLMkkz';
 const JSONBIN_URL       = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`;
+
+// The 9-stage journey used across the admin dashboard and tracking page
+const TRACK_STAGES = ['Shipment Created','Picked Up','Warehouse','Airport','Customs',
+  'Destination Country','Local Distribution','Out for Delivery','Delivered'];
 
 async function fetchShipments(){
   const res = await fetch(JSONBIN_URL, {
@@ -1363,6 +1381,12 @@ function fmtDateOnly(iso){
   return d.toLocaleDateString(undefined,{month:'long',day:'numeric',year:'numeric'});
 }
 
+function escHtml(str){
+  const d=document.createElement('div');
+  d.textContent=str||'';
+  return d.innerHTML;
+}
+
 async function doTrack(){
   const rawVal=document.getElementById('track-input').value.trim();
   const val=rawVal.toUpperCase();
@@ -1370,9 +1394,11 @@ async function doTrack(){
   const btn=document.querySelector('.track-box button');
   btn.textContent='Searching…';btn.disabled=true;
   const statusEl=document.getElementById('track-status');
+  const summaryEl=document.getElementById('track-summary');
   const stepsEl=document.getElementById('track-steps');
   const resultEl=document.getElementById('track-result');
   resultEl.classList.remove('show');
+  summaryEl.classList.remove('show');
 
   try{
     const shipments = await fetchShipments();
@@ -1381,31 +1407,47 @@ async function doTrack(){
     const s = key ? shipments[key] : null;
 
     if(!s){
-      statusEl.textContent = 'No shipment found for tracking ID: ' + val;
-      stepsEl.innerHTML = '<li style="color:rgba(255,255,255,.55);font-size:.83rem;padding:.7rem 0;border:none;">Please double-check your tracking number and try again. If you believe this is an error, contact us at info@swiftexpressdelivery.com</li>';
+      statusEl.innerHTML = 'No shipment found for tracking ID: ' + escHtml(val);
+      summaryEl.innerHTML = '';
+      stepsEl.innerHTML = '<li style="color:rgba(255,255,255,.55);font-size:.83rem;padding:.7rem 0;border:none;">Please double-check your tracking number and try again. If you believe this is an error, contact us at info.guaranteeshipping@gmail.com</li>';
       resultEl.classList.add('show');
       btn.textContent='Track';btn.disabled=false;
       return;
     }
 
-    statusEl.textContent = 'Tracking: ' + s.id + '  ·  Status: ' + s.status;
-
-    const steps = [];
-    // Use senderName/origin from admin backend fields
-    const originLabel = s.origin || 'Origin';
-    steps.push({label:'Shipment Created — ' + originLabel, time:fmtTrackDate(s.created || s.dateShipped), done:true});
-
-    (s.history || []).forEach(h => {
-      steps.push({label: h.location + (h.status ? ' [' + h.status + ']' : ''), time:fmtTrackDate(h.time), done:true});
-    });
-
     const delivered = (s.status === 'Delivered');
-    const destLabel = s.destination || 'Destination';
-    steps.push({
-      label: delivered ? 'Delivered — ' + destLabel : 'Expected Delivery — ' + destLabel,
-      time:  delivered ? 'Delivered ✓' : 'Expected: ' + fmtDateOnly(s.eta),
-      done:  delivered,
-      current: !delivered
+    statusEl.innerHTML = 'Tracking: ' + escHtml(s.id) +
+      '<span class="status-chip ' + (delivered?'delivered':'') + '">' + escHtml(s.status) + '</span>';
+
+    summaryEl.innerHTML = `
+      <div class="ts-route">
+        <div class="ts-pt"><div class="ts-k">From</div><div class="ts-v">${escHtml(s.origin)}</div></div>
+        <div class="arrow">→</div>
+        <div class="ts-pt" style="text-align:right;"><div class="ts-k">To</div><div class="ts-v">${escHtml(s.destination)}</div></div>
+      </div>
+      <div class="ts-item"><div class="ts-k">Receiver</div><div class="ts-v">${escHtml(s.receiverName)}</div></div>
+      <div class="ts-item"><div class="ts-k">Goods</div><div class="ts-v">${escHtml(s.goods)}</div></div>
+      <div class="ts-item"><div class="ts-k">Service</div><div class="ts-v">${escHtml(s.service||'—')}</div></div>
+      <div class="ts-item"><div class="ts-k">Weight</div><div class="ts-v">${escHtml(s.weight||'—')}</div></div>
+      <div class="ts-item"><div class="ts-k">Date Shipped</div><div class="ts-v">${fmtDateOnly(s.dateShipped)}</div></div>
+      <div class="ts-item"><div class="ts-k">Expected Delivery</div><div class="ts-v">${fmtDateOnly(s.eta)}</div></div>
+    `;
+    summaryEl.classList.add('show');
+
+    // Build the full 9-stage journey (Shipment Created → Delivered),
+    // matching the admin dashboard timeline exactly.
+    const stageTimes = {};
+    if (s.history && s.history.length){
+      s.history.forEach(h=>{ if(TRACK_STAGES.includes(h.status)) stageTimes[h.status]=h.time; });
+    }
+    if(!stageTimes['Shipment Created']) stageTimes['Shipment Created'] = s.created || s.dateShipped;
+    const curIdx = TRACK_STAGES.indexOf(s.status);
+
+    const steps = TRACK_STAGES.map((stage,i)=>{
+      const done = curIdx>=0 && i<=curIdx;
+      const current = i===curIdx && stage!=='Delivered';
+      const time = stageTimes[stage] ? fmtTrackDate(stageTimes[stage]) : (done ? '—' : 'Pending');
+      return { label: stage, time, done, current };
     });
 
     stepsEl.innerHTML = steps.map((step, i) => `
@@ -1424,12 +1466,26 @@ async function doTrack(){
   } catch(err){
     console.error(err);
     statusEl.textContent = 'Unable to reach tracking service right now.';
-    stepsEl.innerHTML = '<li style="color:rgba(255,255,255,.55);font-size:.83rem;padding:.7rem 0;border:none;">Please try again shortly, or contact us at info@swiftexpressdelivery.com</li>';
+    summaryEl.innerHTML = '';
+    stepsEl.innerHTML = '<li style="color:rgba(255,255,255,.55);font-size:.83rem;padding:.7rem 0;border:none;">Please try again shortly, or contact us at info.guaranteeshipping@gmail.com</li>';
     resultEl.classList.add('show');
   } finally {
     btn.textContent='Track';btn.disabled=false;
   }
 }
+
+// Auto-track if the page is loaded with ?id=SWEX-... or #track?id=SWEX-...
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id') || params.get('tracking');
+  if(id){
+    document.addEventListener('DOMContentLoaded', ()=>{
+      showPage('track');
+      document.getElementById('track-input').value = id;
+      doTrack();
+    });
+  }
+})();
 
 /* ── FAQ ── */
 function toggleFaq(el){
